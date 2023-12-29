@@ -2,6 +2,7 @@
 {
     partial class Tidbits_main
     {
+
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -47,6 +48,23 @@
             Home_Panel = new Panel();
             Inventory_Panel = new Panel();
             Inventory_table = new DataGridView();
+            Product_panel = new Panel();
+            Product_Table = new DataGridView();
+            Department_panel = new Panel();
+            Back_btn_department = new Button();
+            Department_lbl = new Label();
+            Department_Table = new DataGridView();
+            Product_back_btn = new Button();
+            Product_ID_txt = new TextBox();
+            Product_Update_btn = new Button();
+            Product_Delete_btn = new Button();
+            Product_Add_btn = new Button();
+            Price_txt = new TextBox();
+            Price_lbl = new Label();
+            Product_Name_txt = new TextBox();
+            Product_Name_lbl = new Label();
+            Product_ID_lbl = new Label();
+            Product_lbl = new Label();
             Inventory_Update_btn = new Button();
             Inventory_Delete_btn = new Button();
             Inventory_add_btn = new Button();
@@ -99,23 +117,6 @@
             S_Consignment_ID_txt = new TextBox();
             Sale_lbl = new Label();
             button4 = new Button();
-            Product_panel = new Panel();
-            Product_Table = new DataGridView();
-            Product_back_btn = new Button();
-            Product_ID_txt = new TextBox();
-            Product_Update_btn = new Button();
-            Product_Delete_btn = new Button();
-            Product_Add_btn = new Button();
-            Price_txt = new TextBox();
-            Price_lbl = new Label();
-            Product_Name_txt = new TextBox();
-            Product_Name_lbl = new Label();
-            Product_ID_lbl = new Label();
-            Product_lbl = new Label();
-            Department_panel = new Panel();
-            Back_btn_department = new Button();
-            Department_lbl = new Label();
-            Department_Table = new DataGridView();
             Employee_panel = new Panel();
             Employee_Delete_btn = new Button();
             Employee_Add_btn = new Button();
@@ -161,16 +162,16 @@
             Home_Panel.SuspendLayout();
             Inventory_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Inventory_table).BeginInit();
+            Product_panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Product_Table).BeginInit();
+            Department_panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Department_Table).BeginInit();
             Consignee_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Consignee_table).BeginInit();
             Consignment_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Consignment_Table).BeginInit();
             Sale_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Sale_Table).BeginInit();
-            Product_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Product_Table).BeginInit();
-            Department_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Department_Table).BeginInit();
             Employee_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Employee_Table).BeginInit();
             Assigned_Panel.SuspendLayout();
@@ -365,7 +366,7 @@
             Home_Panel.Controls.Add(Password_txtbox);
             Home_Panel.Controls.Add(Username_lbl);
             Home_Panel.Controls.Add(Username_txtbox);
-            Home_Panel.Location = new Point(51, 232);
+            Home_Panel.Location = new Point(78, 232);
             Home_Panel.Name = "Home_Panel";
             Home_Panel.Size = new Size(1115, 603);
             Home_Panel.TabIndex = 5;
@@ -385,7 +386,7 @@
             Inventory_Panel.Controls.Add(Inventory_ID_txt);
             Inventory_Panel.Controls.Add(Inventory_lbl);
             Inventory_Panel.Controls.Add(Back_inventory_btn);
-            Inventory_Panel.Location = new Point(31, 215);
+            Inventory_Panel.Location = new Point(48, 209);
             Inventory_Panel.Name = "Inventory_Panel";
             Inventory_Panel.Size = new Size(1218, 658);
             Inventory_Panel.TabIndex = 9;
@@ -398,6 +399,182 @@
             Inventory_table.Name = "Inventory_table";
             Inventory_table.Size = new Size(655, 408);
             Inventory_table.TabIndex = 29;
+            // 
+            // Product_panel
+            // 
+            Product_panel.Controls.Add(Product_Table);
+            Product_panel.Controls.Add(Product_back_btn);
+            Product_panel.Controls.Add(Product_ID_txt);
+            Product_panel.Controls.Add(Product_Update_btn);
+            Product_panel.Controls.Add(Product_Delete_btn);
+            Product_panel.Controls.Add(Product_Add_btn);
+            Product_panel.Controls.Add(Price_txt);
+            Product_panel.Controls.Add(Price_lbl);
+            Product_panel.Controls.Add(Product_Name_txt);
+            Product_panel.Controls.Add(Product_Name_lbl);
+            Product_panel.Controls.Add(Product_ID_lbl);
+            Product_panel.Controls.Add(Product_lbl);
+            Product_panel.Location = new Point(55, 212);
+            Product_panel.Name = "Product_panel";
+            Product_panel.Size = new Size(1147, 615);
+            Product_panel.TabIndex = 8;
+            Product_panel.Visible = false;
+            // 
+            // Product_Table
+            // 
+            Product_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Product_Table.Location = new Point(460, 91);
+            Product_Table.Name = "Product_Table";
+            Product_Table.Size = new Size(637, 363);
+            Product_Table.TabIndex = 26;
+            // 
+            // Department_panel
+            // 
+            Department_panel.BackColor = Color.Transparent;
+            Department_panel.Controls.Add(Back_btn_department);
+            Department_panel.Controls.Add(Department_lbl);
+            Department_panel.Controls.Add(Department_Table);
+            Department_panel.Location = new Point(60, 217);
+            Department_panel.Name = "Department_panel";
+            Department_panel.Size = new Size(1161, 629);
+            Department_panel.TabIndex = 7;
+            Department_panel.Visible = false;
+            // 
+            // Back_btn_department
+            // 
+            Back_btn_department.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Back_btn_department.Location = new Point(38, 521);
+            Back_btn_department.Name = "Back_btn_department";
+            Back_btn_department.Size = new Size(153, 39);
+            Back_btn_department.TabIndex = 1;
+            Back_btn_department.Text = "Back";
+            Back_btn_department.UseVisualStyleBackColor = true;
+            Back_btn_department.Click += Back_btn_department_Click;
+            // 
+            // Department_lbl
+            // 
+            Department_lbl.AutoSize = true;
+            Department_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Department_lbl.Location = new Point(536, 8);
+            Department_lbl.Name = "Department_lbl";
+            Department_lbl.Size = new Size(190, 45);
+            Department_lbl.TabIndex = 14;
+            Department_lbl.Text = "Department";
+            Department_lbl.Click += label1_Click_2;
+            // 
+            // Department_Table
+            // 
+            Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Department_Table.Location = new Point(283, 71);
+            Department_Table.Name = "Department_Table";
+            Department_Table.Size = new Size(716, 408);
+            Department_Table.TabIndex = 15;
+            // 
+            // Product_back_btn
+            // 
+            Product_back_btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_back_btn.Location = new Point(40, 521);
+            Product_back_btn.Name = "Product_back_btn";
+            Product_back_btn.Size = new Size(153, 39);
+            Product_back_btn.TabIndex = 16;
+            Product_back_btn.Text = "Back";
+            Product_back_btn.UseVisualStyleBackColor = true;
+            Product_back_btn.Click += Product_back_btn_Click;
+            // 
+            // Product_ID_txt
+            // 
+            Product_ID_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_ID_txt.Location = new Point(193, 111);
+            Product_ID_txt.Name = "Product_ID_txt";
+            Product_ID_txt.Size = new Size(180, 29);
+            Product_ID_txt.TabIndex = 18;
+            // 
+            // Product_Update_btn
+            // 
+            Product_Update_btn.Font = new Font("Segoe UI", 12F);
+            Product_Update_btn.Location = new Point(283, 272);
+            Product_Update_btn.Name = "Product_Update_btn";
+            Product_Update_btn.Size = new Size(97, 32);
+            Product_Update_btn.TabIndex = 25;
+            Product_Update_btn.Text = "Update";
+            Product_Update_btn.UseVisualStyleBackColor = true;
+            // 
+            // Product_Delete_btn
+            // 
+            Product_Delete_btn.Font = new Font("Segoe UI", 12F);
+            Product_Delete_btn.Location = new Point(171, 272);
+            Product_Delete_btn.Name = "Product_Delete_btn";
+            Product_Delete_btn.Size = new Size(97, 32);
+            Product_Delete_btn.TabIndex = 24;
+            Product_Delete_btn.Text = "Delete";
+            Product_Delete_btn.UseVisualStyleBackColor = true;
+            // 
+            // Product_Add_btn
+            // 
+            Product_Add_btn.Font = new Font("Segoe UI", 12F);
+            Product_Add_btn.Location = new Point(56, 272);
+            Product_Add_btn.Name = "Product_Add_btn";
+            Product_Add_btn.Size = new Size(97, 32);
+            Product_Add_btn.TabIndex = 23;
+            Product_Add_btn.Text = "Add";
+            Product_Add_btn.UseVisualStyleBackColor = true;
+            // 
+            // Price_txt
+            // 
+            Price_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Price_txt.Location = new Point(193, 202);
+            Price_txt.Name = "Price_txt";
+            Price_txt.Size = new Size(180, 29);
+            Price_txt.TabIndex = 22;
+            // 
+            // Price_lbl
+            // 
+            Price_lbl.AutoSize = true;
+            Price_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Price_lbl.Location = new Point(83, 205);
+            Price_lbl.Name = "Price_lbl";
+            Price_lbl.Size = new Size(44, 21);
+            Price_lbl.TabIndex = 21;
+            Price_lbl.Text = "Price";
+            // 
+            // Product_Name_txt
+            // 
+            Product_Name_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_Name_txt.Location = new Point(193, 155);
+            Product_Name_txt.Name = "Product_Name_txt";
+            Product_Name_txt.Size = new Size(180, 29);
+            Product_Name_txt.TabIndex = 20;
+            // 
+            // Product_Name_lbl
+            // 
+            Product_Name_lbl.AutoSize = true;
+            Product_Name_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_Name_lbl.Location = new Point(83, 158);
+            Product_Name_lbl.Name = "Product_Name_lbl";
+            Product_Name_lbl.Size = new Size(110, 21);
+            Product_Name_lbl.TabIndex = 19;
+            Product_Name_lbl.Text = "Product Name";
+            // 
+            // Product_ID_lbl
+            // 
+            Product_ID_lbl.AutoSize = true;
+            Product_ID_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_ID_lbl.Location = new Point(83, 114);
+            Product_ID_lbl.Name = "Product_ID_lbl";
+            Product_ID_lbl.Size = new Size(83, 21);
+            Product_ID_lbl.TabIndex = 17;
+            Product_ID_lbl.Text = "Product ID";
+            // 
+            // Product_lbl
+            // 
+            Product_lbl.AutoSize = true;
+            Product_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_lbl.Location = new Point(536, 8);
+            Product_lbl.Name = "Product_lbl";
+            Product_lbl.Size = new Size(131, 45);
+            Product_lbl.TabIndex = 15;
+            Product_lbl.Text = "Product";
+            Product_lbl.Click += label1_Click_3;
             // 
             // Inventory_Update_btn
             // 
@@ -517,7 +694,7 @@
             Consignee_Panel.Controls.Add(Consignee_lbl);
             Consignee_Panel.Controls.Add(Consignee_back_btn);
             Consignee_Panel.Controls.Add(Consignee_table);
-            Consignee_Panel.Location = new Point(27, 211);
+            Consignee_Panel.Location = new Point(34, 200);
             Consignee_Panel.Name = "Consignee_Panel";
             Consignee_Panel.Size = new Size(1265, 693);
             Consignee_Panel.TabIndex = 10;
@@ -635,7 +812,7 @@
             Consignment_Panel.Controls.Add(Consignment_ID_txt);
             Consignment_Panel.Controls.Add(Consignment_lbl);
             Consignment_Panel.Controls.Add(Consignment_back_btn);
-            Consignment_Panel.Location = new Point(23, 208);
+            Consignment_Panel.Location = new Point(24, 194);
             Consignment_Panel.Name = "Consignment_Panel";
             Consignment_Panel.Size = new Size(1260, 715);
             Consignment_Panel.TabIndex = 11;
@@ -789,7 +966,7 @@
             Sale_Panel.Controls.Add(S_Consignment_ID_txt);
             Sale_Panel.Controls.Add(Sale_lbl);
             Sale_Panel.Controls.Add(button4);
-            Sale_Panel.Location = new Point(12, 189);
+            Sale_Panel.Location = new Point(18, 179);
             Sale_Panel.Name = "Sale_Panel";
             Sale_Panel.Size = new Size(1310, 734);
             Sale_Panel.TabIndex = 12;
@@ -927,182 +1104,6 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click_1;
             // 
-            // Product_panel
-            // 
-            Product_panel.Controls.Add(Product_Table);
-            Product_panel.Controls.Add(Product_back_btn);
-            Product_panel.Controls.Add(Product_ID_txt);
-            Product_panel.Controls.Add(Product_Update_btn);
-            Product_panel.Controls.Add(Product_Delete_btn);
-            Product_panel.Controls.Add(Product_Add_btn);
-            Product_panel.Controls.Add(Price_txt);
-            Product_panel.Controls.Add(Price_lbl);
-            Product_panel.Controls.Add(Product_Name_txt);
-            Product_panel.Controls.Add(Product_Name_lbl);
-            Product_panel.Controls.Add(Product_ID_lbl);
-            Product_panel.Controls.Add(Product_lbl);
-            Product_panel.Location = new Point(33, 217);
-            Product_panel.Name = "Product_panel";
-            Product_panel.Size = new Size(1147, 615);
-            Product_panel.TabIndex = 8;
-            Product_panel.Visible = false;
-            // 
-            // Product_Table
-            // 
-            Product_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Product_Table.Location = new Point(460, 91);
-            Product_Table.Name = "Product_Table";
-            Product_Table.Size = new Size(637, 363);
-            Product_Table.TabIndex = 26;
-            // 
-            // Product_back_btn
-            // 
-            Product_back_btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_back_btn.Location = new Point(40, 521);
-            Product_back_btn.Name = "Product_back_btn";
-            Product_back_btn.Size = new Size(153, 39);
-            Product_back_btn.TabIndex = 16;
-            Product_back_btn.Text = "Back";
-            Product_back_btn.UseVisualStyleBackColor = true;
-            Product_back_btn.Click += Product_back_btn_Click;
-            // 
-            // Product_ID_txt
-            // 
-            Product_ID_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_ID_txt.Location = new Point(193, 111);
-            Product_ID_txt.Name = "Product_ID_txt";
-            Product_ID_txt.Size = new Size(180, 29);
-            Product_ID_txt.TabIndex = 18;
-            // 
-            // Product_Update_btn
-            // 
-            Product_Update_btn.Font = new Font("Segoe UI", 12F);
-            Product_Update_btn.Location = new Point(283, 272);
-            Product_Update_btn.Name = "Product_Update_btn";
-            Product_Update_btn.Size = new Size(97, 32);
-            Product_Update_btn.TabIndex = 25;
-            Product_Update_btn.Text = "Update";
-            Product_Update_btn.UseVisualStyleBackColor = true;
-            // 
-            // Product_Delete_btn
-            // 
-            Product_Delete_btn.Font = new Font("Segoe UI", 12F);
-            Product_Delete_btn.Location = new Point(171, 272);
-            Product_Delete_btn.Name = "Product_Delete_btn";
-            Product_Delete_btn.Size = new Size(97, 32);
-            Product_Delete_btn.TabIndex = 24;
-            Product_Delete_btn.Text = "Delete";
-            Product_Delete_btn.UseVisualStyleBackColor = true;
-            // 
-            // Product_Add_btn
-            // 
-            Product_Add_btn.Font = new Font("Segoe UI", 12F);
-            Product_Add_btn.Location = new Point(56, 272);
-            Product_Add_btn.Name = "Product_Add_btn";
-            Product_Add_btn.Size = new Size(97, 32);
-            Product_Add_btn.TabIndex = 23;
-            Product_Add_btn.Text = "Add";
-            Product_Add_btn.UseVisualStyleBackColor = true;
-            // 
-            // Price_txt
-            // 
-            Price_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Price_txt.Location = new Point(193, 202);
-            Price_txt.Name = "Price_txt";
-            Price_txt.Size = new Size(180, 29);
-            Price_txt.TabIndex = 22;
-            // 
-            // Price_lbl
-            // 
-            Price_lbl.AutoSize = true;
-            Price_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Price_lbl.Location = new Point(83, 205);
-            Price_lbl.Name = "Price_lbl";
-            Price_lbl.Size = new Size(44, 21);
-            Price_lbl.TabIndex = 21;
-            Price_lbl.Text = "Price";
-            // 
-            // Product_Name_txt
-            // 
-            Product_Name_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_Name_txt.Location = new Point(193, 155);
-            Product_Name_txt.Name = "Product_Name_txt";
-            Product_Name_txt.Size = new Size(180, 29);
-            Product_Name_txt.TabIndex = 20;
-            // 
-            // Product_Name_lbl
-            // 
-            Product_Name_lbl.AutoSize = true;
-            Product_Name_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_Name_lbl.Location = new Point(83, 158);
-            Product_Name_lbl.Name = "Product_Name_lbl";
-            Product_Name_lbl.Size = new Size(110, 21);
-            Product_Name_lbl.TabIndex = 19;
-            Product_Name_lbl.Text = "Product Name";
-            // 
-            // Product_ID_lbl
-            // 
-            Product_ID_lbl.AutoSize = true;
-            Product_ID_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_ID_lbl.Location = new Point(83, 114);
-            Product_ID_lbl.Name = "Product_ID_lbl";
-            Product_ID_lbl.Size = new Size(83, 21);
-            Product_ID_lbl.TabIndex = 17;
-            Product_ID_lbl.Text = "Product ID";
-            // 
-            // Product_lbl
-            // 
-            Product_lbl.AutoSize = true;
-            Product_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_lbl.Location = new Point(536, 8);
-            Product_lbl.Name = "Product_lbl";
-            Product_lbl.Size = new Size(131, 45);
-            Product_lbl.TabIndex = 15;
-            Product_lbl.Text = "Product";
-            Product_lbl.Click += label1_Click_3;
-            // 
-            // Department_panel
-            // 
-            Department_panel.BackColor = Color.Transparent;
-            Department_panel.Controls.Add(Back_btn_department);
-            Department_panel.Controls.Add(Department_lbl);
-            Department_panel.Controls.Add(Department_Table);
-            Department_panel.Location = new Point(35, 219);
-            Department_panel.Name = "Department_panel";
-            Department_panel.Size = new Size(1161, 629);
-            Department_panel.TabIndex = 7;
-            Department_panel.Visible = false;
-            // 
-            // Back_btn_department
-            // 
-            Back_btn_department.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Back_btn_department.Location = new Point(38, 521);
-            Back_btn_department.Name = "Back_btn_department";
-            Back_btn_department.Size = new Size(153, 39);
-            Back_btn_department.TabIndex = 1;
-            Back_btn_department.Text = "Back";
-            Back_btn_department.UseVisualStyleBackColor = true;
-            Back_btn_department.Click += Back_btn_department_Click;
-            // 
-            // Department_lbl
-            // 
-            Department_lbl.AutoSize = true;
-            Department_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Department_lbl.Location = new Point(536, 8);
-            Department_lbl.Name = "Department_lbl";
-            Department_lbl.Size = new Size(190, 45);
-            Department_lbl.TabIndex = 14;
-            Department_lbl.Text = "Department";
-            Department_lbl.Click += label1_Click_2;
-            // 
-            // Department_Table
-            // 
-            Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Department_Table.Location = new Point(283, 71);
-            Department_Table.Name = "Department_Table";
-            Department_Table.Size = new Size(716, 408);
-            Department_Table.TabIndex = 15;
-            // 
             // Employee_panel
             // 
             Employee_panel.Controls.Add(Employee_Delete_btn);
@@ -1119,7 +1120,7 @@
             Employee_panel.Controls.Add(Employee_lbl);
             Employee_panel.Controls.Add(Employee_Table);
             Employee_panel.Controls.Add(Employee_Update_btn);
-            Employee_panel.Location = new Point(41, 224);
+            Employee_panel.Location = new Point(68, 224);
             Employee_panel.Name = "Employee_panel";
             Employee_panel.Size = new Size(1125, 616);
             Employee_panel.TabIndex = 6;
@@ -1274,7 +1275,7 @@
             Assigned_Panel.Controls.Add(A_Department_ID_txt);
             Assigned_Panel.Controls.Add(Assigned_lbl);
             Assigned_Panel.Controls.Add(Assigned_Back_btn);
-            Assigned_Panel.Location = new Point(8, 185);
+            Assigned_Panel.Location = new Point(12, 169);
             Assigned_Panel.Name = "Assigned_Panel";
             Assigned_Panel.Size = new Size(1325, 740);
             Assigned_Panel.TabIndex = 13;
@@ -1408,7 +1409,7 @@
             Monitor_Panel.Controls.Add(Date_txt);
             Monitor_Panel.Controls.Add(Monitor_lbl);
             Monitor_Panel.Controls.Add(Monitor_Back_btn);
-            Monitor_Panel.Location = new Point(2, 181);
+            Monitor_Panel.Location = new Point(5, 164);
             Monitor_Panel.Name = "Monitor_Panel";
             Monitor_Panel.Size = new Size(1352, 761);
             Monitor_Panel.TabIndex = 14;
@@ -1555,6 +1556,12 @@
             Inventory_Panel.ResumeLayout(false);
             Inventory_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Inventory_table).EndInit();
+            Product_panel.ResumeLayout(false);
+            Product_panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Product_Table).EndInit();
+            Department_panel.ResumeLayout(false);
+            Department_panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Department_Table).EndInit();
             Consignee_Panel.ResumeLayout(false);
             Consignee_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Consignee_table).EndInit();
@@ -1564,12 +1571,6 @@
             Sale_Panel.ResumeLayout(false);
             Sale_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Sale_Table).EndInit();
-            Product_panel.ResumeLayout(false);
-            Product_panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)Product_Table).EndInit();
-            Department_panel.ResumeLayout(false);
-            Department_panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)Department_Table).EndInit();
             Employee_panel.ResumeLayout(false);
             Employee_panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Employee_Table).EndInit();
