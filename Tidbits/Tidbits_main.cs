@@ -24,7 +24,7 @@ namespace Tidbits
         private void button1_Click(object sender, EventArgs e)
         {
             Employee_panel.Visible = true;
-            InitializeDataGridView();
+            InitializeDataGridViewEmployee();
             DisplayEmployeeData();
             Home_Panel.Visible = false;
         }
@@ -116,6 +116,8 @@ namespace Tidbits
         {
             Department_panel.Visible = true;
             Home_Panel.Visible = false;
+            InitializeDataGridViewDepartment();
+            DisplayDepartmentData();
         }
 
         private void label1_Click_2(object sender, EventArgs e)
@@ -191,7 +193,8 @@ namespace Tidbits
             Home_Panel.Visible = false;
             Monitor_Panel.Visible = true;
         }
-        private void InitializeDataGridView()
+        //Display Start Initialize
+        private void InitializeDataGridViewEmployee()
         {
             // Clear existing columns
             Employee_Table.Columns.Clear();
@@ -202,6 +205,19 @@ namespace Tidbits
             Employee_Table.Columns.Add("Last_Name", "Last Name");
             Employee_Table.Columns.Add("First_Name", "First Name");
         }
+        private void InitializeDataGridViewDepartment()
+        {
+            // Clear existing columns
+            Department_Table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Department_Table.Columns.Add("Department_ID", "Department ID");
+            Department_Table.Columns.Add("Department_Name", "Department Name");
+        }
+
+        //Display End Initialize
+
+        //Display Start Data
         private void DisplayEmployeeData()
         {
             // Clear existing rows in the DataGridView
@@ -240,6 +256,44 @@ namespace Tidbits
                 }
             }
         }
+        private void DisplayDepartmentData()
+        {
+            // Clear existing rows in the DataGridView
+            Department_Table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Assuming your table is named "Employee"
+                string selectQuery = "SELECT * FROM tidbitsdb.department";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Check if the reader has any rows
+                        if (reader.HasRows)
+                        {
+                            // Iterate through the rows and add them to the DataGridView
+                            while (reader.Read())
+                            {
+                                // Assuming your DataGridView columns are named "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
+                                int departmentid = reader.GetInt32(reader.GetOrdinal("Department_ID"));
+                                string departmentname = reader.GetString(reader.GetOrdinal("Department_Name"));
+
+                                // Add a new row to the DataGridView
+                                Department_Table.Rows.Add(departmentid, departmentname);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Display End Data
 
         private void Employee_Table_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -341,58 +395,73 @@ namespace Tidbits
 
         private void Employee_Update_btn_Click(object sender, EventArgs e)
         {
-            // Check if a row is selected in the DataGridView
-            if (Employee_Table.SelectedRows.Count > 0)
+            try
             {
-                // Get the selected row
-                DataGridViewRow selectedRow = Employee_Table.SelectedRows[0];
-
-                // Get the value from the "Employee_ID" column (assuming it's the first column)
-                int employeeIdToUpdate = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
-
-                // Replace "YourConnectionString" with your actual connection string
-                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                if (Employee_Table.SelectedRows.Count > 0)
                 {
-                    connection.Open();
+                    // Get the selected row
+                    DataGridViewRow selectedRow = Employee_Table.SelectedRows[0];
 
-                    // Assuming your table is named "Employee" and columns are "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
-                    string updateQuery = "UPDATE Employee SET Contact_Number = @ContactNumber, Last_Name = @LastName, First_Name = @FirstName " +
-                                         "WHERE Employee_ID = @EmployeeID";
+                    // Get the value from the "Employee_ID" column (assuming it's the first column)
+                    int employeeIdToUpdate = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
 
-                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                    // Replace "YourConnectionString" with your actual connection string
+                    string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
-                        // Assuming you want to update values from textboxes
-                        cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
-                        cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
-                        cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
-                        cmd.Parameters.AddWithValue("@FirstName", First_Name_txt.Text);
+                        connection.Open();
 
-                        // Execute the query
-                        int rowsAffected = cmd.ExecuteNonQuery();
+                        // Assuming your table is named "Employee" and columns are "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
+                        string updateQuery = "UPDATE Employee SET Contact_Number = @ContactNumber, Last_Name = @LastName, First_Name = @FirstName " +
+                                             "WHERE Employee_ID = @EmployeeID";
 
-                        if (rowsAffected > 0)
+                        using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Update the values in the DataGridView
-                            selectedRow.Cells["Contact_Number"].Value = Contact_Number_txt.Text;
-                            selectedRow.Cells["Last_Name"].Value = Last_Name_txt.Text;
-                            selectedRow.Cells["First_Name"].Value = First_Name_txt.Text;
+                            // Assuming you want to update values from textboxes
+                            cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
+                            cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
+                            cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
+                            cmd.Parameters.AddWithValue("@FirstName", First_Name_txt.Text);
 
-                            MessageBox.Show("Employee updated successfully!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to update employee. Please try again.");
+                            // Execute the query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Update the values in the DataGridView
+                                selectedRow.Cells["Contact_Number"].Value = Contact_Number_txt.Text;
+                                selectedRow.Cells["Last_Name"].Value = Last_Name_txt.Text;
+                                selectedRow.Cells["First_Name"].Value = First_Name_txt.Text;
+
+                                MessageBox.Show("Employee updated successfully!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to update employee. Please try again.");
+                            }
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Please select a row to update.");
+                }
             }
-            else
-            {
-                MessageBox.Show("Please select a row to update.");
+
+            catch{
+                MessageBox.Show("Error! Please make sure you enter a valid input");
             }
+            
         }
 
+        private void Contact_Number_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Sale_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Sale_ID_txt.Text = Sale_ID_txt.Text.Remove(Sale_ID_txt.Text.Length - 1);
+            }
+        }
     }
 }

@@ -30,6 +30,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tidbits_main));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             Username_txtbox = new TextBox();
             Username_lbl = new Label();
@@ -50,10 +52,6 @@
             Inventory_table = new DataGridView();
             Product_panel = new Panel();
             Product_Table = new DataGridView();
-            Department_panel = new Panel();
-            Back_btn_department = new Button();
-            Department_lbl = new Label();
-            Department_Table = new DataGridView();
             Product_back_btn = new Button();
             Product_ID_txt = new TextBox();
             Product_Update_btn = new Button();
@@ -76,6 +74,10 @@
             Inventory_ID_txt = new TextBox();
             Inventory_lbl = new Label();
             Back_inventory_btn = new Button();
+            Department_panel = new Panel();
+            Back_btn_department = new Button();
+            Department_lbl = new Label();
+            Department_Table = new DataGridView();
             Consignee_Panel = new Panel();
             Consignee_update_btn = new Button();
             Consignee_Delete_btn = new Button();
@@ -375,7 +377,6 @@
             // 
             Inventory_Panel.BackColor = Color.Transparent;
             Inventory_Panel.Controls.Add(Inventory_table);
-            Inventory_Panel.Controls.Add(Product_panel);
             Inventory_Panel.Controls.Add(Inventory_Update_btn);
             Inventory_Panel.Controls.Add(Inventory_Delete_btn);
             Inventory_Panel.Controls.Add(Inventory_add_btn);
@@ -404,7 +405,6 @@
             // Product_panel
             // 
             Product_panel.Controls.Add(Product_Table);
-            Product_panel.Controls.Add(Department_panel);
             Product_panel.Controls.Add(Product_back_btn);
             Product_panel.Controls.Add(Product_ID_txt);
             Product_panel.Controls.Add(Product_Update_btn);
@@ -416,7 +416,7 @@
             Product_panel.Controls.Add(Product_Name_lbl);
             Product_panel.Controls.Add(Product_ID_lbl);
             Product_panel.Controls.Add(Product_lbl);
-            Product_panel.Location = new Point(26, 33);
+            Product_panel.Location = new Point(55, 202);
             Product_panel.Name = "Product_panel";
             Product_panel.Size = new Size(1147, 615);
             Product_panel.TabIndex = 8;
@@ -429,48 +429,6 @@
             Product_Table.Name = "Product_Table";
             Product_Table.Size = new Size(637, 363);
             Product_Table.TabIndex = 26;
-            // 
-            // Department_panel
-            // 
-            Department_panel.BackColor = Color.Transparent;
-            Department_panel.Controls.Add(Back_btn_department);
-            Department_panel.Controls.Add(Department_lbl);
-            Department_panel.Controls.Add(Department_Table);
-            Department_panel.Location = new Point(38, 33);
-            Department_panel.Name = "Department_panel";
-            Department_panel.Size = new Size(1161, 629);
-            Department_panel.TabIndex = 7;
-            Department_panel.Visible = false;
-            // 
-            // Back_btn_department
-            // 
-            Back_btn_department.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Back_btn_department.Location = new Point(38, 521);
-            Back_btn_department.Name = "Back_btn_department";
-            Back_btn_department.Size = new Size(153, 39);
-            Back_btn_department.TabIndex = 1;
-            Back_btn_department.Text = "Back";
-            Back_btn_department.UseVisualStyleBackColor = true;
-            Back_btn_department.Click += Back_btn_department_Click;
-            // 
-            // Department_lbl
-            // 
-            Department_lbl.AutoSize = true;
-            Department_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Department_lbl.Location = new Point(536, 8);
-            Department_lbl.Name = "Department_lbl";
-            Department_lbl.Size = new Size(190, 45);
-            Department_lbl.TabIndex = 14;
-            Department_lbl.Text = "Department";
-            Department_lbl.Click += label1_Click_2;
-            // 
-            // Department_Table
-            // 
-            Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Department_Table.Location = new Point(283, 71);
-            Department_Table.Name = "Department_Table";
-            Department_Table.Size = new Size(716, 408);
-            Department_Table.TabIndex = 15;
             // 
             // Product_back_btn
             // 
@@ -682,6 +640,60 @@
             Back_inventory_btn.Text = "Back";
             Back_inventory_btn.UseVisualStyleBackColor = true;
             Back_inventory_btn.Click += Back_inventory_btn_Click;
+            // 
+            // Department_panel
+            // 
+            Department_panel.BackColor = Color.Transparent;
+            Department_panel.Controls.Add(Back_btn_department);
+            Department_panel.Controls.Add(Department_lbl);
+            Department_panel.Controls.Add(Department_Table);
+            Department_panel.Location = new Point(61, 215);
+            Department_panel.Name = "Department_panel";
+            Department_panel.Size = new Size(1161, 629);
+            Department_panel.TabIndex = 7;
+            Department_panel.Visible = false;
+            // 
+            // Back_btn_department
+            // 
+            Back_btn_department.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Back_btn_department.Location = new Point(38, 521);
+            Back_btn_department.Name = "Back_btn_department";
+            Back_btn_department.Size = new Size(153, 39);
+            Back_btn_department.TabIndex = 1;
+            Back_btn_department.Text = "Back";
+            Back_btn_department.UseVisualStyleBackColor = true;
+            Back_btn_department.Click += Back_btn_department_Click;
+            // 
+            // Department_lbl
+            // 
+            Department_lbl.AutoSize = true;
+            Department_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Department_lbl.Location = new Point(536, 8);
+            Department_lbl.Name = "Department_lbl";
+            Department_lbl.Size = new Size(190, 45);
+            Department_lbl.TabIndex = 14;
+            Department_lbl.Text = "Department";
+            Department_lbl.Click += label1_Click_2;
+            // 
+            // Department_Table
+            // 
+            Department_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Department_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Department_Table.BackgroundColor = SystemColors.ActiveCaption;
+            Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 30F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            Department_Table.DefaultCellStyle = dataGridViewCellStyle1;
+            Department_Table.Location = new Point(283, 71);
+            Department_Table.Name = "Department_Table";
+            Department_Table.ReadOnly = true;
+            Department_Table.Size = new Size(716, 408);
+            Department_Table.TabIndex = 15;
             // 
             // Consignee_Panel
             // 
@@ -1160,6 +1172,7 @@
             Contact_Number_txt.Name = "Contact_Number_txt";
             Contact_Number_txt.Size = new Size(160, 29);
             Contact_Number_txt.TabIndex = 8;
+            Contact_Number_txt.TextChanged += Contact_Number_txt_TextChanged;
             // 
             // Contact_Number_lbl
             // 
@@ -1249,9 +1262,21 @@
             // 
             // Employee_Table
             // 
+            Employee_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Employee_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Employee_Table.BackgroundColor = Color.DarkSlateGray;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.RosyBrown;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             Employee_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Employee_Table.Location = new Point(396, 74);
             Employee_Table.Name = "Employee_Table";
+            Employee_Table.ReadOnly = true;
             Employee_Table.Size = new Size(778, 435);
             Employee_Table.TabIndex = 14;
             Employee_Table.CellContentClick += Employee_Table_CellContentClick;
@@ -1545,6 +1570,8 @@
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1202, 810);
             Controls.Add(Monitor_Panel);
+            Controls.Add(Product_panel);
+            Controls.Add(Department_panel);
             Controls.Add(Employee_panel);
             Controls.Add(Home_Panel);
             Controls.Add(pictureBox1);
