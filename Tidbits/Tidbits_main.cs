@@ -64,35 +64,45 @@ namespace Tidbits
 
         private void Employee_ID_txt_TextChanged(object sender, EventArgs e)
         {
-
+            if (System.Text.RegularExpressions.Regex.IsMatch(Employee_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Employee_ID_txt.Text = Employee_ID_txt.Text.Remove(Employee_ID_txt.Text.Length - 1);
+            }
         }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
             string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();
-
-                // Assuming your table is named "Employee" and columns are "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
-                string insertQuery = "INSERT INTO tidbitsdb.employee (Employee_ID, Contact_Number, Last_Name, First_Name) " +
-                                     "VALUES (@EmployeeID, @ContactNumber, @LastName, @FirstName)";
-
-                using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    // Assuming you want to insert values from textboxes
-                    cmd.Parameters.AddWithValue("@EmployeeID", Employee_ID_txt.Text);
-                    cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
-                    cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
-                    cmd.Parameters.AddWithValue("@FirstName", First_Name_txt.Text);
+                    connection.Open();
 
-                    // Execute the query
-                    cmd.ExecuteNonQuery();
+                    string insertQuery = "INSERT INTO tidbitsdb.employee (Employee_ID, Contact_Number, Last_Name, First_Name) " +
+                                         "VALUES (@EmployeeID, @ContactNumber, @LastName, @FirstName)";
 
-                    // You can add additional logic here, like clearing textboxes or updating the UI
-                    MessageBox.Show("Employee added successfully!");
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                    {
+                        // Assuming you want to insert values from textboxes
+                        cmd.Parameters.AddWithValue("@EmployeeID", Employee_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
+                        cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
+                        cmd.Parameters.AddWithValue("@FirstName", First_Name_txt.Text);
+
+                        // Execute the query
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Employee added successfully!");
+                        DisplayEmployeeData();
+                    }
                 }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
             }
         }
 
@@ -197,7 +207,7 @@ namespace Tidbits
             // Clear existing rows in the DataGridView
             Employee_Table.Rows.Clear();
 
-            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True"; // Replace with your actual connection string
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -261,6 +271,127 @@ namespace Tidbits
         {
             Home_Panel.Visible = true;
             Monitor_Panel.Visible = false;
+        }
+
+        private void Employee_Delete_btn_Click(object sender, EventArgs e)
+        {
+            // Check if a row is selected in the DataGridView
+            if (Employee_Table.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = Employee_Table.SelectedRows[0];
+
+                // Get the value from the "Employee_ID" column (assuming it's the first column)
+                int employeeIdToDelete = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
+
+                // Replace "YourConnectionString" with your actual connection string
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Delete related records in the "Assigned" table
+                    string deleteAssignedQuery = "DELETE FROM Assigned WHERE Employee_ID = @EmployeeID";
+
+                    using (MySqlCommand cmdAssigned = new MySqlCommand(deleteAssignedQuery, connection))
+                    {
+                        cmdAssigned.Parameters.AddWithValue("@EmployeeID", employeeIdToDelete);
+                        cmdAssigned.ExecuteNonQuery();
+                    }
+
+                    string deleteMonitorQuery = "DELETE FROM Monitor WHERE Employee_ID = @EmployeeID";
+
+                    using (MySqlCommand cmdAssignedTable = new MySqlCommand(deleteMonitorQuery, connection))
+                    {
+                        cmdAssignedTable.Parameters.AddWithValue("@EmployeeID", employeeIdToDelete);
+                        cmdAssignedTable.ExecuteNonQuery();
+                    }
+
+
+                    // Now, delete the parent record in the "Employee" table
+                    string deleteEmployeeQuery = "DELETE FROM Employee WHERE Employee_ID = @EmployeeID";
+
+                    using (MySqlCommand cmdEmployee = new MySqlCommand(deleteEmployeeQuery, connection))
+                    {
+                        cmdEmployee.Parameters.AddWithValue("@EmployeeID", employeeIdToDelete);
+
+                        // Execute the query
+                        int rowsAffected = cmdEmployee.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Remove the row from the DataGridView
+                            Employee_Table.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("Employee and related records deleted successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete employee. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
+        private void Employee_Update_btn_Click(object sender, EventArgs e)
+        {
+            // Check if a row is selected in the DataGridView
+            if (Employee_Table.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = Employee_Table.SelectedRows[0];
+
+                // Get the value from the "Employee_ID" column (assuming it's the first column)
+                int employeeIdToUpdate = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
+
+                // Replace "YourConnectionString" with your actual connection string
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Assuming your table is named "Employee" and columns are "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
+                    string updateQuery = "UPDATE Employee SET Contact_Number = @ContactNumber, Last_Name = @LastName, First_Name = @FirstName " +
+                                         "WHERE Employee_ID = @EmployeeID";
+
+                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                    {
+                        // Assuming you want to update values from textboxes
+                        cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
+                        cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
+                        cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
+                        cmd.Parameters.AddWithValue("@FirstName", First_Name_txt.Text);
+
+                        // Execute the query
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Update the values in the DataGridView
+                            selectedRow.Cells["Contact_Number"].Value = Contact_Number_txt.Text;
+                            selectedRow.Cells["Last_Name"].Value = Last_Name_txt.Text;
+                            selectedRow.Cells["First_Name"].Value = First_Name_txt.Text;
+
+                            MessageBox.Show("Employee updated successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update employee. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to update.");
+            }
         }
 
     }

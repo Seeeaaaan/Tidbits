@@ -375,6 +375,7 @@
             // 
             Inventory_Panel.BackColor = Color.Transparent;
             Inventory_Panel.Controls.Add(Inventory_table);
+            Inventory_Panel.Controls.Add(Product_panel);
             Inventory_Panel.Controls.Add(Inventory_Update_btn);
             Inventory_Panel.Controls.Add(Inventory_Delete_btn);
             Inventory_Panel.Controls.Add(Inventory_add_btn);
@@ -386,7 +387,7 @@
             Inventory_Panel.Controls.Add(Inventory_ID_txt);
             Inventory_Panel.Controls.Add(Inventory_lbl);
             Inventory_Panel.Controls.Add(Back_inventory_btn);
-            Inventory_Panel.Location = new Point(48, 209);
+            Inventory_Panel.Location = new Point(30, 21);
             Inventory_Panel.Name = "Inventory_Panel";
             Inventory_Panel.Size = new Size(1218, 658);
             Inventory_Panel.TabIndex = 9;
@@ -403,6 +404,7 @@
             // Product_panel
             // 
             Product_panel.Controls.Add(Product_Table);
+            Product_panel.Controls.Add(Department_panel);
             Product_panel.Controls.Add(Product_back_btn);
             Product_panel.Controls.Add(Product_ID_txt);
             Product_panel.Controls.Add(Product_Update_btn);
@@ -414,7 +416,7 @@
             Product_panel.Controls.Add(Product_Name_lbl);
             Product_panel.Controls.Add(Product_ID_lbl);
             Product_panel.Controls.Add(Product_lbl);
-            Product_panel.Location = new Point(55, 212);
+            Product_panel.Location = new Point(26, 33);
             Product_panel.Name = "Product_panel";
             Product_panel.Size = new Size(1147, 615);
             Product_panel.TabIndex = 8;
@@ -434,7 +436,7 @@
             Department_panel.Controls.Add(Back_btn_department);
             Department_panel.Controls.Add(Department_lbl);
             Department_panel.Controls.Add(Department_Table);
-            Department_panel.Location = new Point(60, 217);
+            Department_panel.Location = new Point(38, 33);
             Department_panel.Name = "Department_panel";
             Department_panel.Size = new Size(1161, 629);
             Department_panel.TabIndex = 7;
@@ -685,6 +687,7 @@
             // 
             Consignee_Panel.BackColor = Color.Transparent;
             Consignee_Panel.Controls.Add(Consignee_update_btn);
+            Consignee_Panel.Controls.Add(Inventory_Panel);
             Consignee_Panel.Controls.Add(Consignee_Delete_btn);
             Consignee_Panel.Controls.Add(Consignee_add_btn);
             Consignee_Panel.Controls.Add(Consignee_Name_lbl);
@@ -694,7 +697,7 @@
             Consignee_Panel.Controls.Add(Consignee_lbl);
             Consignee_Panel.Controls.Add(Consignee_back_btn);
             Consignee_Panel.Controls.Add(Consignee_table);
-            Consignee_Panel.Location = new Point(34, 200);
+            Consignee_Panel.Location = new Point(42, 36);
             Consignee_Panel.Name = "Consignee_Panel";
             Consignee_Panel.Size = new Size(1265, 693);
             Consignee_Panel.TabIndex = 10;
@@ -799,6 +802,7 @@
             // 
             Consignment_Panel.BackColor = Color.Transparent;
             Consignment_Panel.Controls.Add(Resell_Price_lbl);
+            Consignment_Panel.Controls.Add(Consignee_Panel);
             Consignment_Panel.Controls.Add(Resell_Price_txt);
             Consignment_Panel.Controls.Add(C_Product_ID_lbl);
             Consignment_Panel.Controls.Add(C_Product_ID_txt);
@@ -812,7 +816,7 @@
             Consignment_Panel.Controls.Add(Consignment_ID_txt);
             Consignment_Panel.Controls.Add(Consignment_lbl);
             Consignment_Panel.Controls.Add(Consignment_back_btn);
-            Consignment_Panel.Location = new Point(24, 194);
+            Consignment_Panel.Location = new Point(29, 20);
             Consignment_Panel.Name = "Consignment_Panel";
             Consignment_Panel.Size = new Size(1260, 715);
             Consignment_Panel.TabIndex = 11;
@@ -953,6 +957,7 @@
             // 
             Sale_Panel.BackColor = Color.Transparent;
             Sale_Panel.Controls.Add(Sold_Date_lbl);
+            Sale_Panel.Controls.Add(Consignment_Panel);
             Sale_Panel.Controls.Add(Sold_Date_txt);
             Sale_Panel.Controls.Add(Sale_ID_lbl);
             Sale_Panel.Controls.Add(Sale_ID_txt);
@@ -966,7 +971,7 @@
             Sale_Panel.Controls.Add(S_Consignment_ID_txt);
             Sale_Panel.Controls.Add(Sale_lbl);
             Sale_Panel.Controls.Add(button4);
-            Sale_Panel.Location = new Point(18, 179);
+            Sale_Panel.Location = new Point(67, 76);
             Sale_Panel.Name = "Sale_Panel";
             Sale_Panel.Size = new Size(1310, 734);
             Sale_Panel.TabIndex = 12;
@@ -1135,6 +1140,7 @@
             Employee_Delete_btn.TabIndex = 10;
             Employee_Delete_btn.Text = "Delete";
             Employee_Delete_btn.UseVisualStyleBackColor = true;
+            Employee_Delete_btn.Click += Employee_Delete_btn_Click;
             // 
             // Employee_Add_btn
             // 
@@ -1259,12 +1265,14 @@
             Employee_Update_btn.TabIndex = 11;
             Employee_Update_btn.Text = "Update";
             Employee_Update_btn.UseVisualStyleBackColor = true;
+            Employee_Update_btn.Click += Employee_Update_btn_Click;
             // 
             // Assigned_Panel
             // 
             Assigned_Panel.BackColor = Color.Transparent;
             Assigned_Panel.Controls.Add(Assigned_Table);
             Assigned_Panel.Controls.Add(A_Employee_ID_lbl);
+            Assigned_Panel.Controls.Add(Sale_Panel);
             Assigned_Panel.Controls.Add(A_Employee_ID_txt);
             Assigned_Panel.Controls.Add(Assigned_Update_btn);
             Assigned_Panel.Controls.Add(Assigned_Delete_btn);
@@ -1275,7 +1283,7 @@
             Assigned_Panel.Controls.Add(A_Department_ID_txt);
             Assigned_Panel.Controls.Add(Assigned_lbl);
             Assigned_Panel.Controls.Add(Assigned_Back_btn);
-            Assigned_Panel.Location = new Point(12, 169);
+            Assigned_Panel.Location = new Point(71, 73);
             Assigned_Panel.Name = "Assigned_Panel";
             Assigned_Panel.Size = new Size(1325, 740);
             Assigned_Panel.TabIndex = 13;
@@ -1398,6 +1406,7 @@
             // 
             Monitor_Panel.BackColor = Color.Transparent;
             Monitor_Panel.Controls.Add(M_Employee_ID_lbl);
+            Monitor_Panel.Controls.Add(Assigned_Panel);
             Monitor_Panel.Controls.Add(M_Employee_ID_txt);
             Monitor_Panel.Controls.Add(M_Inventory_ID_lbl);
             Monitor_Panel.Controls.Add(M_Inventory_ID);
@@ -1409,7 +1418,7 @@
             Monitor_Panel.Controls.Add(Date_txt);
             Monitor_Panel.Controls.Add(Monitor_lbl);
             Monitor_Panel.Controls.Add(Monitor_Back_btn);
-            Monitor_Panel.Location = new Point(5, 164);
+            Monitor_Panel.Location = new Point(792, 66);
             Monitor_Panel.Name = "Monitor_Panel";
             Monitor_Panel.Size = new Size(1352, 761);
             Monitor_Panel.TabIndex = 14;
@@ -1536,13 +1545,6 @@
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1202, 810);
             Controls.Add(Monitor_Panel);
-            Controls.Add(Assigned_Panel);
-            Controls.Add(Sale_Panel);
-            Controls.Add(Consignment_Panel);
-            Controls.Add(Consignee_Panel);
-            Controls.Add(Inventory_Panel);
-            Controls.Add(Product_panel);
-            Controls.Add(Department_panel);
             Controls.Add(Employee_panel);
             Controls.Add(Home_Panel);
             Controls.Add(pictureBox1);
