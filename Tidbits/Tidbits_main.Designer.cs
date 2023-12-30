@@ -566,6 +566,7 @@
             Product_ID_txt.Name = "Product_ID_txt";
             Product_ID_txt.Size = new Size(180, 29);
             Product_ID_txt.TabIndex = 18;
+            Product_ID_txt.TextChanged += Product_ID_txt_TextChanged;
             // 
             // Product_Update_btn
             // 
@@ -586,6 +587,7 @@
             Product_Delete_btn.TabIndex = 24;
             Product_Delete_btn.Text = "Delete";
             Product_Delete_btn.UseVisualStyleBackColor = true;
+            Product_Delete_btn.Click += Product_Delete_btn_Click;
             // 
             // Product_Add_btn
             // 

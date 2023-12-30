@@ -542,5 +542,79 @@ namespace Tidbits
                 MessageBox.Show("Error! Please make sure you enter a valid input");
             }
         }
+
+        private void Product_Delete_btn_Click(object sender, EventArgs e)
+        {
+
+            if (Product_Table.SelectedRows.Count > 0)
+            {
+
+                DataGridViewRow selectedRow = Product_Table.SelectedRows[0];
+
+
+                int ProductIdToDelete = Convert.ToInt32(selectedRow.Cells["Product_ID"].Value);
+
+
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+
+                    string deleteInventoryQuery = "DELETE FROM Inventory WHERE Product_ID = @ProductID";
+
+                    using (MySqlCommand cmdAssigned = new MySqlCommand(deleteInventoryQuery, connection))
+                    {
+                        cmdAssigned.Parameters.AddWithValue("@ProductID", ProductIdToDelete);
+                        cmdAssigned.ExecuteNonQuery();
+                    }
+
+                    // Delete related records in "OtherTable1"
+                    string deleteConsignmentQuery = "DELETE FROM Consignment WHERE Product_ID = @ProductID";
+
+                    using (MySqlCommand cmdOtherTable1 = new MySqlCommand(deleteConsignmentQuery, connection))
+                    {
+                        cmdOtherTable1.Parameters.AddWithValue("@ProductID", ProductIdToDelete);
+                        cmdOtherTable1.ExecuteNonQuery();
+                    }
+
+                    string deleteProductQuery = "DELETE FROM Product WHERE Product_ID = @ProductID";
+
+                    using (MySqlCommand cmdProduct = new MySqlCommand(deleteProductQuery, connection))
+                    {
+                        cmdProduct.Parameters.AddWithValue("@ProductID", ProductIdToDelete);
+
+                        // Execute the query
+                        int rowsAffected = cmdProduct.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Remove the row from the DataGridView
+                            Product_Table.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("Product and related records deleted successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete Product. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
+        private void Product_ID_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Product_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Product_ID_txt.Text = Product_ID_txt.Text.Remove(Product_ID_txt.Text.Length - 1);
+            }
+        }
     }
 }
