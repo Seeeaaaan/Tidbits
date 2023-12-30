@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tidbits_main));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             Username_txtbox = new TextBox();
             Username_lbl = new Label();
@@ -50,6 +51,17 @@
             Home_Panel = new Panel();
             Inventory_Panel = new Panel();
             Inventory_table = new DataGridView();
+            Inventory_Update_btn = new Button();
+            Inventory_Delete_btn = new Button();
+            Inventory_add_btn = new Button();
+            Quantity_lbl = new Label();
+            Quantity_txt = new TextBox();
+            I_Product_ID_lbl = new Label();
+            I_Product_ID_txt = new TextBox();
+            Inventory_ID_lbl = new Label();
+            Inventory_ID_txt = new TextBox();
+            Inventory_lbl = new Label();
+            Back_inventory_btn = new Button();
             Product_panel = new Panel();
             Product_Table = new DataGridView();
             Product_back_btn = new Button();
@@ -63,17 +75,6 @@
             Product_Name_lbl = new Label();
             Product_ID_lbl = new Label();
             Product_lbl = new Label();
-            Inventory_Update_btn = new Button();
-            Inventory_Delete_btn = new Button();
-            Inventory_add_btn = new Button();
-            Quantity_lbl = new Label();
-            Quantity_txt = new TextBox();
-            I_Product_ID_lbl = new Label();
-            I_Product_ID_txt = new TextBox();
-            Inventory_ID_lbl = new Label();
-            Inventory_ID_txt = new TextBox();
-            Inventory_lbl = new Label();
-            Back_inventory_btn = new Button();
             Department_panel = new Panel();
             Back_btn_department = new Button();
             Department_lbl = new Label();
@@ -402,140 +403,6 @@
             Inventory_table.Size = new Size(655, 408);
             Inventory_table.TabIndex = 29;
             // 
-            // Product_panel
-            // 
-            Product_panel.Controls.Add(Product_Table);
-            Product_panel.Controls.Add(Product_back_btn);
-            Product_panel.Controls.Add(Product_ID_txt);
-            Product_panel.Controls.Add(Product_Update_btn);
-            Product_panel.Controls.Add(Product_Delete_btn);
-            Product_panel.Controls.Add(Product_Add_btn);
-            Product_panel.Controls.Add(Price_txt);
-            Product_panel.Controls.Add(Price_lbl);
-            Product_panel.Controls.Add(Product_Name_txt);
-            Product_panel.Controls.Add(Product_Name_lbl);
-            Product_panel.Controls.Add(Product_ID_lbl);
-            Product_panel.Controls.Add(Product_lbl);
-            Product_panel.Location = new Point(55, 202);
-            Product_panel.Name = "Product_panel";
-            Product_panel.Size = new Size(1147, 615);
-            Product_panel.TabIndex = 8;
-            Product_panel.Visible = false;
-            // 
-            // Product_Table
-            // 
-            Product_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Product_Table.Location = new Point(460, 91);
-            Product_Table.Name = "Product_Table";
-            Product_Table.Size = new Size(637, 363);
-            Product_Table.TabIndex = 26;
-            // 
-            // Product_back_btn
-            // 
-            Product_back_btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_back_btn.Location = new Point(40, 521);
-            Product_back_btn.Name = "Product_back_btn";
-            Product_back_btn.Size = new Size(153, 39);
-            Product_back_btn.TabIndex = 16;
-            Product_back_btn.Text = "Back";
-            Product_back_btn.UseVisualStyleBackColor = true;
-            Product_back_btn.Click += Product_back_btn_Click;
-            // 
-            // Product_ID_txt
-            // 
-            Product_ID_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_ID_txt.Location = new Point(193, 111);
-            Product_ID_txt.Name = "Product_ID_txt";
-            Product_ID_txt.Size = new Size(180, 29);
-            Product_ID_txt.TabIndex = 18;
-            // 
-            // Product_Update_btn
-            // 
-            Product_Update_btn.Font = new Font("Segoe UI", 12F);
-            Product_Update_btn.Location = new Point(283, 272);
-            Product_Update_btn.Name = "Product_Update_btn";
-            Product_Update_btn.Size = new Size(97, 32);
-            Product_Update_btn.TabIndex = 25;
-            Product_Update_btn.Text = "Update";
-            Product_Update_btn.UseVisualStyleBackColor = true;
-            // 
-            // Product_Delete_btn
-            // 
-            Product_Delete_btn.Font = new Font("Segoe UI", 12F);
-            Product_Delete_btn.Location = new Point(171, 272);
-            Product_Delete_btn.Name = "Product_Delete_btn";
-            Product_Delete_btn.Size = new Size(97, 32);
-            Product_Delete_btn.TabIndex = 24;
-            Product_Delete_btn.Text = "Delete";
-            Product_Delete_btn.UseVisualStyleBackColor = true;
-            // 
-            // Product_Add_btn
-            // 
-            Product_Add_btn.Font = new Font("Segoe UI", 12F);
-            Product_Add_btn.Location = new Point(56, 272);
-            Product_Add_btn.Name = "Product_Add_btn";
-            Product_Add_btn.Size = new Size(97, 32);
-            Product_Add_btn.TabIndex = 23;
-            Product_Add_btn.Text = "Add";
-            Product_Add_btn.UseVisualStyleBackColor = true;
-            // 
-            // Price_txt
-            // 
-            Price_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Price_txt.Location = new Point(193, 202);
-            Price_txt.Name = "Price_txt";
-            Price_txt.Size = new Size(180, 29);
-            Price_txt.TabIndex = 22;
-            // 
-            // Price_lbl
-            // 
-            Price_lbl.AutoSize = true;
-            Price_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Price_lbl.Location = new Point(83, 205);
-            Price_lbl.Name = "Price_lbl";
-            Price_lbl.Size = new Size(44, 21);
-            Price_lbl.TabIndex = 21;
-            Price_lbl.Text = "Price";
-            // 
-            // Product_Name_txt
-            // 
-            Product_Name_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_Name_txt.Location = new Point(193, 155);
-            Product_Name_txt.Name = "Product_Name_txt";
-            Product_Name_txt.Size = new Size(180, 29);
-            Product_Name_txt.TabIndex = 20;
-            // 
-            // Product_Name_lbl
-            // 
-            Product_Name_lbl.AutoSize = true;
-            Product_Name_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_Name_lbl.Location = new Point(83, 158);
-            Product_Name_lbl.Name = "Product_Name_lbl";
-            Product_Name_lbl.Size = new Size(110, 21);
-            Product_Name_lbl.TabIndex = 19;
-            Product_Name_lbl.Text = "Product Name";
-            // 
-            // Product_ID_lbl
-            // 
-            Product_ID_lbl.AutoSize = true;
-            Product_ID_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_ID_lbl.Location = new Point(83, 114);
-            Product_ID_lbl.Name = "Product_ID_lbl";
-            Product_ID_lbl.Size = new Size(83, 21);
-            Product_ID_lbl.TabIndex = 17;
-            Product_ID_lbl.Text = "Product ID";
-            // 
-            // Product_lbl
-            // 
-            Product_lbl.AutoSize = true;
-            Product_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Product_lbl.Location = new Point(536, 8);
-            Product_lbl.Name = "Product_lbl";
-            Product_lbl.Size = new Size(131, 45);
-            Product_lbl.TabIndex = 15;
-            Product_lbl.Text = "Product";
-            Product_lbl.Click += label1_Click_3;
-            // 
             // Inventory_Update_btn
             // 
             Inventory_Update_btn.Font = new Font("Segoe UI", 12F);
@@ -641,6 +508,153 @@
             Back_inventory_btn.UseVisualStyleBackColor = true;
             Back_inventory_btn.Click += Back_inventory_btn_Click;
             // 
+            // Product_panel
+            // 
+            Product_panel.Controls.Add(Product_Table);
+            Product_panel.Controls.Add(Product_back_btn);
+            Product_panel.Controls.Add(Product_ID_txt);
+            Product_panel.Controls.Add(Product_Update_btn);
+            Product_panel.Controls.Add(Product_Delete_btn);
+            Product_panel.Controls.Add(Product_Add_btn);
+            Product_panel.Controls.Add(Price_txt);
+            Product_panel.Controls.Add(Price_lbl);
+            Product_panel.Controls.Add(Product_Name_txt);
+            Product_panel.Controls.Add(Product_Name_lbl);
+            Product_panel.Controls.Add(Product_ID_lbl);
+            Product_panel.Controls.Add(Product_lbl);
+            Product_panel.Location = new Point(55, 202);
+            Product_panel.Name = "Product_panel";
+            Product_panel.Size = new Size(1147, 615);
+            Product_panel.TabIndex = 8;
+            Product_panel.Visible = false;
+            // 
+            // Product_Table
+            // 
+            Product_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Product_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Product_Table.BackgroundColor = SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            Product_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            Product_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Product_Table.Location = new Point(460, 91);
+            Product_Table.Name = "Product_Table";
+            Product_Table.ReadOnly = true;
+            Product_Table.Size = new Size(637, 363);
+            Product_Table.TabIndex = 26;
+            // 
+            // Product_back_btn
+            // 
+            Product_back_btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_back_btn.Location = new Point(40, 521);
+            Product_back_btn.Name = "Product_back_btn";
+            Product_back_btn.Size = new Size(153, 39);
+            Product_back_btn.TabIndex = 16;
+            Product_back_btn.Text = "Back";
+            Product_back_btn.UseVisualStyleBackColor = true;
+            Product_back_btn.Click += Product_back_btn_Click;
+            // 
+            // Product_ID_txt
+            // 
+            Product_ID_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_ID_txt.Location = new Point(193, 111);
+            Product_ID_txt.Name = "Product_ID_txt";
+            Product_ID_txt.Size = new Size(180, 29);
+            Product_ID_txt.TabIndex = 18;
+            // 
+            // Product_Update_btn
+            // 
+            Product_Update_btn.Font = new Font("Segoe UI", 12F);
+            Product_Update_btn.Location = new Point(283, 272);
+            Product_Update_btn.Name = "Product_Update_btn";
+            Product_Update_btn.Size = new Size(97, 32);
+            Product_Update_btn.TabIndex = 25;
+            Product_Update_btn.Text = "Update";
+            Product_Update_btn.UseVisualStyleBackColor = true;
+            // 
+            // Product_Delete_btn
+            // 
+            Product_Delete_btn.Font = new Font("Segoe UI", 12F);
+            Product_Delete_btn.Location = new Point(171, 272);
+            Product_Delete_btn.Name = "Product_Delete_btn";
+            Product_Delete_btn.Size = new Size(97, 32);
+            Product_Delete_btn.TabIndex = 24;
+            Product_Delete_btn.Text = "Delete";
+            Product_Delete_btn.UseVisualStyleBackColor = true;
+            // 
+            // Product_Add_btn
+            // 
+            Product_Add_btn.Font = new Font("Segoe UI", 12F);
+            Product_Add_btn.Location = new Point(56, 272);
+            Product_Add_btn.Name = "Product_Add_btn";
+            Product_Add_btn.Size = new Size(97, 32);
+            Product_Add_btn.TabIndex = 23;
+            Product_Add_btn.Text = "Add";
+            Product_Add_btn.UseVisualStyleBackColor = true;
+            Product_Add_btn.Click += Product_Add_btn_Click;
+            // 
+            // Price_txt
+            // 
+            Price_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Price_txt.Location = new Point(193, 202);
+            Price_txt.Name = "Price_txt";
+            Price_txt.Size = new Size(180, 29);
+            Price_txt.TabIndex = 22;
+            // 
+            // Price_lbl
+            // 
+            Price_lbl.AutoSize = true;
+            Price_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Price_lbl.Location = new Point(83, 205);
+            Price_lbl.Name = "Price_lbl";
+            Price_lbl.Size = new Size(44, 21);
+            Price_lbl.TabIndex = 21;
+            Price_lbl.Text = "Price";
+            // 
+            // Product_Name_txt
+            // 
+            Product_Name_txt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_Name_txt.Location = new Point(193, 155);
+            Product_Name_txt.Name = "Product_Name_txt";
+            Product_Name_txt.Size = new Size(180, 29);
+            Product_Name_txt.TabIndex = 20;
+            // 
+            // Product_Name_lbl
+            // 
+            Product_Name_lbl.AutoSize = true;
+            Product_Name_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_Name_lbl.Location = new Point(83, 158);
+            Product_Name_lbl.Name = "Product_Name_lbl";
+            Product_Name_lbl.Size = new Size(110, 21);
+            Product_Name_lbl.TabIndex = 19;
+            Product_Name_lbl.Text = "Product Name";
+            // 
+            // Product_ID_lbl
+            // 
+            Product_ID_lbl.AutoSize = true;
+            Product_ID_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_ID_lbl.Location = new Point(83, 114);
+            Product_ID_lbl.Name = "Product_ID_lbl";
+            Product_ID_lbl.Size = new Size(83, 21);
+            Product_ID_lbl.TabIndex = 17;
+            Product_ID_lbl.Text = "Product ID";
+            // 
+            // Product_lbl
+            // 
+            Product_lbl.AutoSize = true;
+            Product_lbl.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Product_lbl.Location = new Point(536, 8);
+            Product_lbl.Name = "Product_lbl";
+            Product_lbl.Size = new Size(131, 45);
+            Product_lbl.TabIndex = 15;
+            Product_lbl.Text = "Product";
+            Product_lbl.Click += label1_Click_3;
+            // 
             // Department_panel
             // 
             Department_panel.BackColor = Color.Transparent;
@@ -681,14 +695,14 @@
             Department_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Department_Table.BackgroundColor = SystemColors.ActiveCaption;
             Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 30F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            Department_Table.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 30F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            Department_Table.DefaultCellStyle = dataGridViewCellStyle2;
             Department_Table.Location = new Point(283, 71);
             Department_Table.Name = "Department_Table";
             Department_Table.ReadOnly = true;
@@ -1265,14 +1279,14 @@
             Employee_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Employee_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Employee_Table.BackgroundColor = Color.DarkSlateGray;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.RosyBrown;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 18F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.RosyBrown;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             Employee_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Employee_Table.Location = new Point(396, 74);
             Employee_Table.Name = "Employee_Table";

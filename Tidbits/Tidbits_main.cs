@@ -145,6 +145,8 @@ namespace Tidbits
         {
             Product_panel.Visible = true;
             Home_Panel.Visible = false;
+            InitializeDataGridViewProduct();
+            DisplayProductData();
         }
 
         private void Product_panel_Paint_1(object sender, PaintEventArgs e)
@@ -214,6 +216,16 @@ namespace Tidbits
             Department_Table.Columns.Add("Department_ID", "Department ID");
             Department_Table.Columns.Add("Department_Name", "Department Name");
         }
+        private void InitializeDataGridViewProduct()
+        {
+            // Clear existing columns
+            Product_Table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Product_Table.Columns.Add("Product_ID", "Product ID");
+            Product_Table.Columns.Add("Product_Name", "Product Name");
+            Product_Table.Columns.Add("Price", "Price");
+        }
 
         //Display End Initialize
 
@@ -267,7 +279,6 @@ namespace Tidbits
             {
                 connection.Open();
 
-                // Assuming your table is named "Employee"
                 string selectQuery = "SELECT * FROM tidbitsdb.department";
 
                 using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
@@ -280,12 +291,45 @@ namespace Tidbits
                             // Iterate through the rows and add them to the DataGridView
                             while (reader.Read())
                             {
-                                // Assuming your DataGridView columns are named "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
                                 int departmentid = reader.GetInt32(reader.GetOrdinal("Department_ID"));
                                 string departmentname = reader.GetString(reader.GetOrdinal("Department_Name"));
 
                                 // Add a new row to the DataGridView
                                 Department_Table.Rows.Add(departmentid, departmentname);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void DisplayProductData()
+        {
+            // Clear existing rows in the DataGridView
+            Product_Table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT * FROM tidbitsdb.product";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Check if the reader has any rows
+                        if (reader.HasRows)
+                        {
+                            // Iterate through the rows and add them to the DataGridView
+                            while (reader.Read())
+                            {
+                                int productId = reader.GetInt32(reader.GetOrdinal("Product_ID"));
+                                string productName = reader.GetString(reader.GetOrdinal("Product_Name"));
+                                string price = reader.GetString(reader.GetOrdinal("Price"));
+
+                                Product_Table.Rows.Add(productId, productName, price);
                             }
                         }
                     }
@@ -449,10 +493,11 @@ namespace Tidbits
                 }
             }
 
-            catch{
+            catch
+            {
                 MessageBox.Show("Error! Please make sure you enter a valid input");
             }
-            
+
         }
 
         private void Contact_Number_txt_TextChanged(object sender, EventArgs e)
@@ -461,6 +506,40 @@ namespace Tidbits
             {
                 MessageBox.Show("Please enter only numbers.");
                 Sale_ID_txt.Text = Sale_ID_txt.Text.Remove(Sale_ID_txt.Text.Length - 1);
+            }
+        }
+
+        private void Product_Add_btn_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string insertQuery = "INSERT INTO tidbitsdb.product (Product_ID, Product_Name, Price) " +
+                                         "VALUES (@ProductID, @ProductName, @Price)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                    {
+                        // Assuming you want to insert values from textboxes
+                        cmd.Parameters.AddWithValue("@ProductID", Product_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ProductName", Product_Name_txt.Text);
+                        cmd.Parameters.AddWithValue("@Price", Price_txt.Text);
+
+                        // Execute the query
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Product added successfully!");
+                        //DisplayProductData();
+                    }
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
             }
         }
     }
