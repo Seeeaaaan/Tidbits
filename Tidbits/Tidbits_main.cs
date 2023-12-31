@@ -1,4 +1,5 @@
 using MySql.Data.MySqlClient;
+using System.Linq.Expressions;
 
 
 namespace Tidbits
@@ -541,6 +542,8 @@ namespace Tidbits
             {
                 MessageBox.Show("Error! Please make sure you enter a valid input");
             }
+            InitializeDataGridViewProduct();
+            DisplayProductData();
         }
 
         private void Product_Delete_btn_Click(object sender, EventArgs e)
@@ -614,6 +617,62 @@ namespace Tidbits
             {
                 MessageBox.Show("Please enter only numbers.");
                 Product_ID_txt.Text = Product_ID_txt.Text.Remove(Product_ID_txt.Text.Length - 1);
+            }
+        }
+
+        private void Product_Update_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Product_Table.SelectedRows.Count > 0)
+                {
+
+                    DataGridViewRow selectedRow = Product_Table.SelectedRows[0];
+
+
+                    int productIdToUpdate = Convert.ToInt32(selectedRow.Cells["Product_ID"].Value);
+
+                    string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        string updateQuery = "UPDATE Product SET Product_Name = @ProductName, Price = @Price " +
+                                             "WHERE Product_ID = @ProductID";
+
+                        using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                        {
+                            // Assuming you want to update values from textboxes
+                            cmd.Parameters.AddWithValue("@ProductID", productIdToUpdate);
+                            cmd.Parameters.AddWithValue("@ProductName", Product_Name_txt.Text);
+                            cmd.Parameters.AddWithValue("@Price", Price_txt.Text);
+
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Update the values in the DataGridView
+                                selectedRow.Cells["Product_Name"].Value = Product_Name_txt.Text;
+                                selectedRow.Cells["Price"].Value = Price_txt.Text;
+
+                                MessageBox.Show("Product updated successfully!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to update Product. Please try again.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a row to update.");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
             }
         }
     }

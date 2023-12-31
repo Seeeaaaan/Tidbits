@@ -577,6 +577,7 @@
             Product_Update_btn.TabIndex = 25;
             Product_Update_btn.Text = "Update";
             Product_Update_btn.UseVisualStyleBackColor = true;
+            Product_Update_btn.Click += Product_Update_btn_Click;
             // 
             // Product_Delete_btn
             // 
