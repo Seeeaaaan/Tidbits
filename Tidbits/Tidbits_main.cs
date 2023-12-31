@@ -47,6 +47,8 @@ namespace Tidbits
         {
             Home_Panel.Visible = false;
             Consignment_Panel.Visible = true;
+            InitializeDataGridViewConsignment();
+            DisplayConsignmentData();
         }
 
         private void Tidbits_main_Load(object sender, EventArgs e)
@@ -88,7 +90,6 @@ namespace Tidbits
 
                     using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
                     {
-                        // Assuming you want to insert values from textboxes
                         cmd.Parameters.AddWithValue("@EmployeeID", Employee_ID_txt.Text);
                         cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
                         cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
@@ -251,6 +252,17 @@ namespace Tidbits
             Consignee_table.Columns.Add("Consignee_Name", "Consignee_Name");
         }
 
+        private void InitializeDataGridViewConsignment()
+        {
+            // Clear existing columns
+            Consignment_Table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Consignment_Table.Columns.Add("Consignment_ID", "Consignment ID");
+            Consignment_Table.Columns.Add("Consignee_ID", "Consignee ID");
+            Consignment_Table.Columns.Add("Product_ID", "Product ID");
+            Consignment_Table.Columns.Add("Resell_Price", "Resell Price");
+        }
         //Display End Initialize
 
         //Display Start Data
@@ -433,6 +445,39 @@ namespace Tidbits
             }
         }
 
+        private void DisplayConsignmentData()
+        {
+            Consignment_Table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT * FROM tidbitsdb.consignment";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                string consignmentId = reader.GetString(reader.GetOrdinal("Consignment_ID"));
+                                string consigneeID = reader.GetString(reader.GetOrdinal("Consignee_ID"));
+                                string productID = reader.GetString(reader.GetOrdinal("Product_ID"));
+                                string resellPrice = reader.GetString(reader.GetOrdinal("Resell_Price"));
+
+                                Consignment_Table.Rows.Add(consignmentId, consigneeID, productID, resellPrice);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         //Display End Data
 
         private void Employee_Table_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -478,7 +523,6 @@ namespace Tidbits
                 // Get the value from the "Employee_ID" column (assuming it's the first column)
                 int employeeIdToDelete = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
 
-                // Replace "YourConnectionString" with your actual connection string
                 string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -486,7 +530,7 @@ namespace Tidbits
                     connection.Open();
 
                     // Delete related records in the "Assigned" table
-                    string deleteAssignedQuery = "DELETE FROM Assigned WHERE Employee_ID = @EmployeeID";
+                    string deleteAssignedQuery = "DELETE FROM tidbitsdb.Assigned WHERE Employee_ID = @EmployeeID";
 
                     using (MySqlCommand cmdAssigned = new MySqlCommand(deleteAssignedQuery, connection))
                     {
@@ -494,7 +538,7 @@ namespace Tidbits
                         cmdAssigned.ExecuteNonQuery();
                     }
 
-                    string deleteMonitorQuery = "DELETE FROM Monitor WHERE Employee_ID = @EmployeeID";
+                    string deleteMonitorQuery = "DELETE FROM tidbitsdb.Monitor WHERE Employee_ID = @EmployeeID";
 
                     using (MySqlCommand cmdAssignedTable = new MySqlCommand(deleteMonitorQuery, connection))
                     {
@@ -503,8 +547,8 @@ namespace Tidbits
                     }
 
 
-                    // Now, delete the parent record in the "Employee" table
-                    string deleteEmployeeQuery = "DELETE FROM Employee WHERE Employee_ID = @EmployeeID";
+                    // Delete the parent record in the "Employee" table
+                    string deleteEmployeeQuery = "DELETE FROM tidbitsdb.Employee WHERE Employee_ID = @EmployeeID";
 
                     using (MySqlCommand cmdEmployee = new MySqlCommand(deleteEmployeeQuery, connection))
                     {
@@ -660,7 +704,7 @@ namespace Tidbits
                     connection.Open();
 
 
-                    string deleteInventoryQuery = "DELETE FROM Inventory WHERE Product_ID = @ProductID";
+                    string deleteInventoryQuery = "DELETE FROM tidbitsdb.Inventory WHERE Product_ID = @ProductID";
 
                     using (MySqlCommand cmdAssigned = new MySqlCommand(deleteInventoryQuery, connection))
                     {
@@ -669,7 +713,7 @@ namespace Tidbits
                     }
 
                     // Delete related records in "OtherTable1"
-                    string deleteConsignmentQuery = "DELETE FROM Consignment WHERE Product_ID = @ProductID";
+                    string deleteConsignmentQuery = "DELETE FROM tidbitsdb.Consignment WHERE Product_ID = @ProductID";
 
                     using (MySqlCommand cmdOtherTable1 = new MySqlCommand(deleteConsignmentQuery, connection))
                     {
@@ -677,7 +721,7 @@ namespace Tidbits
                         cmdOtherTable1.ExecuteNonQuery();
                     }
 
-                    string deleteProductQuery = "DELETE FROM Product WHERE Product_ID = @ProductID";
+                    string deleteProductQuery = "DELETE FROM tidbitsdb.Product WHERE Product_ID = @ProductID";
 
                     using (MySqlCommand cmdProduct = new MySqlCommand(deleteProductQuery, connection))
                     {
@@ -867,8 +911,7 @@ namespace Tidbits
 
 
 
-                    // Now, delete the parent record in the "Employee" table
-                    string deleteInventoryQuery = "DELETE FROM Inventory WHERE Inventory_ID = @InventoryID";
+                    string deleteInventoryQuery = "DELETE FROM tidbitsdb.Inventory WHERE Inventory_ID = @InventoryID";
 
                     using (MySqlCommand cmdInventory = new MySqlCommand(deleteInventoryQuery, connection))
                     {
@@ -921,7 +964,6 @@ namespace Tidbits
 
                         using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Assuming you want to update values from textboxes
                             cmd.Parameters.AddWithValue("@InventoryID", inventoryIdToUpdate);
                             cmd.Parameters.AddWithValue("@ProductID", I_Product_ID_txt.Text);
                             cmd.Parameters.AddWithValue("@Quantity", Quantity_txt.Text);
@@ -962,11 +1004,7 @@ namespace Tidbits
 
         private void Consignee_txt_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(Consignee_txt.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                Consignee_txt.Text = Consignee_txt.Text.Remove(Consignee_txt.Text.Length - 1);
-            }
+
         }
 
         private void Consignee_add_btn_Click(object sender, EventArgs e)
@@ -1020,7 +1058,7 @@ namespace Tidbits
                     connection.Open();
 
 
-                    string deleteConsignmentQuery = "DELETE FROM Consignment WHERE Consignee_ID = @ConsigneeID";
+                    string deleteConsignmentQuery = "DELETE FROM tidbitsdb.Consignment WHERE Consignee_ID = @ConsigneeID";
 
                     using (MySqlCommand cmdConsignmentTable = new MySqlCommand(deleteConsignmentQuery, connection))
                     {
@@ -1028,7 +1066,7 @@ namespace Tidbits
                         cmdConsignmentTable.ExecuteNonQuery();
                     }
 
-                    string deleteConsigneeQuery = "DELETE FROM Consignee WHERE Consignee_ID = @ConsigneeID";
+                    string deleteConsigneeQuery = "DELETE FROM tidbitsdb.Consignee WHERE Consignee_ID = @ConsigneeID";
 
                     using (MySqlCommand cmdConsignee = new MySqlCommand(deleteConsigneeQuery, connection))
                     {
@@ -1102,5 +1140,111 @@ namespace Tidbits
                 MessageBox.Show("Please select a row to update.");
             }
         }
+
+        private void C_Product_ID_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(C_Product_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                C_Product_ID_txt.Text = C_Product_ID_txt.Text.Remove(C_Product_ID_txt.Text.Length - 1);
+            }
+        }
+
+        private void Resell_Price_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Resell_Price_txt.Text, "[^0-9.]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Resell_Price_txt.Text = Resell_Price_txt.Text.Remove(Resell_Price_txt.Text.Length - 1);
+            }
+        }
+
+        private void Consignment_Add_btn_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string insertQuery = "INSERT INTO tidbitsdb.consignment (Consignment_ID, Consignee_ID, Product_ID, Resell_Price) " +
+                                         "VALUES (@ConsignmentID, @ConsigneeID, @ProductID, @ResellPrice)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                    {
+
+                        cmd.Parameters.AddWithValue("@ConsignmentID", Consignment_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ConsigneeID", C_Consignee_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ProductID", C_Product_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ResellPrice", Resell_Price_txt.Text);
+
+                        // Execute the query
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Consignment added successfully!");
+                        DisplayConsignmentData();
+                    }
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
+            }
+        }
+
+        private void Consignment_Table_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Consignment_Delete_btn_Click(object sender, EventArgs e)
+        {
+            if (Consignment_Table.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = Consignment_Table.SelectedRows[0];
+
+                // Get the value from the "Consignment_ID" column
+                string consignmentIDToDelete = selectedRow.Cells["Consignment_ID"].Value.ToString();
+
+                // Replace "YourConnectionString" with your actual connection string
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Assuming your table is named "Consignment" and the column is "Consignment_ID"
+                    string deleteQuery = "DELETE FROM Consignment WHERE Consignment_ID = @ConsignmentID";
+
+                    using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@ConsignmentID", consignmentIDToDelete);
+
+                        // Execute the query
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Remove the row from the DataGridView
+                            Consignment_Table.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("Consignment deleted successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete consignment. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
     }
 }
