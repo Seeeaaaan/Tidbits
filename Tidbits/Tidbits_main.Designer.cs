@@ -746,7 +746,7 @@
             Consignee_Panel.Controls.Add(Consignee_lbl);
             Consignee_Panel.Controls.Add(Consignee_back_btn);
             Consignee_Panel.Controls.Add(Consignee_table);
-            Consignee_Panel.Location = new Point(42, 36);
+            Consignee_Panel.Location = new Point(36, 193);
             Consignee_Panel.Name = "Consignee_Panel";
             Consignee_Panel.Size = new Size(1265, 693);
             Consignee_Panel.TabIndex = 10;
@@ -771,6 +771,7 @@
             Consignee_Delete_btn.TabIndex = 27;
             Consignee_Delete_btn.Text = "Delete";
             Consignee_Delete_btn.UseVisualStyleBackColor = true;
+            Consignee_Delete_btn.Click += Consignee_Delete_btn_Click;
             // 
             // Consignee_add_btn
             // 
@@ -781,6 +782,7 @@
             Consignee_add_btn.TabIndex = 26;
             Consignee_add_btn.Text = "Add";
             Consignee_add_btn.UseVisualStyleBackColor = true;
+            Consignee_add_btn.Click += Consignee_add_btn_Click;
             // 
             // Consignee_Name_lbl
             // 
@@ -817,6 +819,7 @@
             Consignee_txt.Name = "Consignee_txt";
             Consignee_txt.Size = new Size(175, 29);
             Consignee_txt.TabIndex = 19;
+            Consignee_txt.TextChanged += Consignee_txt_TextChanged;
             // 
             // Consignee_lbl
             // 
@@ -846,12 +849,12 @@
             Consignee_table.Name = "Consignee_table";
             Consignee_table.Size = new Size(655, 408);
             Consignee_table.TabIndex = 29;
+            Consignee_table.CellContentClick += Consignee_table_CellContentClick;
             // 
             // Consignment_Panel
             // 
             Consignment_Panel.BackColor = Color.Transparent;
             Consignment_Panel.Controls.Add(Resell_Price_lbl);
-            Consignment_Panel.Controls.Add(Consignee_Panel);
             Consignment_Panel.Controls.Add(Resell_Price_txt);
             Consignment_Panel.Controls.Add(C_Product_ID_lbl);
             Consignment_Panel.Controls.Add(C_Product_ID_txt);
@@ -1607,6 +1610,7 @@
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1202, 810);
             Controls.Add(Monitor_Panel);
+            Controls.Add(Consignee_Panel);
             Controls.Add(Inventory_Panel);
             Controls.Add(Product_panel);
             Controls.Add(Department_panel);

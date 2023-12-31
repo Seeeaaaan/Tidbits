@@ -39,6 +39,8 @@ namespace Tidbits
         {
             Home_Panel.Visible = false;
             Consignee_Panel.Visible = true;
+            InitializeDataGridViewConsignee();
+            DisplayConsigneeData();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -239,6 +241,15 @@ namespace Tidbits
             Inventory_table.Columns.Add("I_Product_ID", "Product ID");
             Inventory_table.Columns.Add("Quantity", "Quantity");
         }
+        private void InitializeDataGridViewConsignee()
+        {
+            // Clear existing columns
+            Consignee_table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Consignee_table.Columns.Add("Consignee_ID", "Consignee_ID");
+            Consignee_table.Columns.Add("Consignee_Name", "Consignee_Name");
+        }
 
         //Display End Initialize
 
@@ -379,6 +390,42 @@ namespace Tidbits
 
                                 // Add a new row to the DataGridView
                                 Inventory_table.Rows.Add(inventoryid, iproductid, quantity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DisplayConsigneeData()
+        {
+            // Clear existing rows in the DataGridView
+            Consignee_table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT * FROM tidbitsdb.consignee";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        if (reader.HasRows)
+                        {
+                            // Iterate through the rows and add them to the DataGridView
+                            while (reader.Read())
+                            {
+
+                                int consigneeId = reader.GetInt32(reader.GetOrdinal("Consignee_ID"));
+                                string consigneeName = reader.GetString(reader.GetOrdinal("Name"));
+
+                                // Add a new row to the DataGridView
+                                Consignee_table.Rows.Add(consigneeId, consigneeName);
                             }
                         }
                     }
@@ -905,6 +952,110 @@ namespace Tidbits
             catch
             {
                 MessageBox.Show("Please enter a valid input");
+            }
+        }
+
+        private void Consignee_table_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Consignee_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Consignee_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Consignee_txt.Text = Consignee_txt.Text.Remove(Consignee_txt.Text.Length - 1);
+            }
+        }
+
+        private void Consignee_add_btn_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string insertQuery = "INSERT INTO tidbitsdb.consignee (Consignee_ID, Name ) " +
+                                         "VALUES (@ConsigneeID, @ConsigneeName)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                    {
+
+                        cmd.Parameters.AddWithValue("@ConsigneeID", Consignee_txt.Text);
+                        cmd.Parameters.AddWithValue("@ConsigneeName", Consignee_Name_txt.Text);
+
+                        // Execute the query
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Consignee added successfully!");
+                        DisplayConsigneeData();
+                    }
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
+            }
+        }
+
+        private void Consignee_Delete_btn_Click(object sender, EventArgs e)
+        {
+            if (Consignee_table.SelectedRows.Count > 0)
+            {
+
+                DataGridViewRow selectedRow = Consignee_table.SelectedRows[0];
+
+
+                int ConsigneeIDToDelete = Convert.ToInt32(selectedRow.Cells["Consignee_ID"].Value);
+
+
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+
+
+                    // Delete related records in "OtherTable1"
+                    string deleteConsignmentQuery = "DELETE FROM Consignment WHERE Consignee_ID = @ConsigneeID";
+
+                    using (MySqlCommand cmdConsignmentTable = new MySqlCommand(deleteConsignmentQuery, connection))
+                    {
+                        cmdConsignmentTable.Parameters.AddWithValue("@ConsigneeID", ConsigneeIDToDelete);
+                        cmdConsignmentTable.ExecuteNonQuery();
+                    }
+
+                    string deleteConsigneeQuery = "DELETE FROM Consignee WHERE Consignee_ID = @ConsigneeID";
+
+                    using (MySqlCommand cmdConsignee = new MySqlCommand(deleteConsigneeQuery, connection))
+                    {
+                        cmdConsignee.Parameters.AddWithValue("@ConsigneeID", ConsigneeIDToDelete);
+
+                        // Execute the query
+                        int rowsAffected = cmdConsignee.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Remove the row from the DataGridView
+                            Consignee_table.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("Consignee and related records deleted successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete Consignee. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
             }
         }
     }
