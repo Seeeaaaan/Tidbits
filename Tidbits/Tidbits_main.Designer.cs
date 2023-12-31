@@ -34,6 +34,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             Username_txtbox = new TextBox();
             Username_lbl = new Label();
@@ -761,6 +762,7 @@
             Consignee_update_btn.TabIndex = 28;
             Consignee_update_btn.Text = "Update";
             Consignee_update_btn.UseVisualStyleBackColor = true;
+            Consignee_update_btn.Click += Consignee_update_btn_Click;
             // 
             // Consignee_Delete_btn
             // 
@@ -844,6 +846,17 @@
             // 
             // Consignee_table
             // 
+            Consignee_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Consignee_table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Consignee_table.BackgroundColor = Color.DarkSlateBlue;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 20F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            Consignee_table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             Consignee_table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Consignee_table.Location = new Point(456, 98);
             Consignee_table.Name = "Consignee_table";
@@ -1305,14 +1318,14 @@
             Employee_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Employee_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Employee_Table.BackgroundColor = Color.DarkSlateGray;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.RosyBrown;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 18F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.RosyBrown;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             Employee_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Employee_Table.Location = new Point(396, 74);
             Employee_Table.Name = "Employee_Table";

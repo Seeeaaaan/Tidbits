@@ -1020,8 +1020,6 @@ namespace Tidbits
                     connection.Open();
 
 
-
-                    // Delete related records in "OtherTable1"
                     string deleteConsignmentQuery = "DELETE FROM Consignment WHERE Consignee_ID = @ConsigneeID";
 
                     using (MySqlCommand cmdConsignmentTable = new MySqlCommand(deleteConsignmentQuery, connection))
@@ -1036,12 +1034,11 @@ namespace Tidbits
                     {
                         cmdConsignee.Parameters.AddWithValue("@ConsigneeID", ConsigneeIDToDelete);
 
-                        // Execute the query
+
                         int rowsAffected = cmdConsignee.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                            // Remove the row from the DataGridView
                             Consignee_table.Rows.Remove(selectedRow);
 
                             MessageBox.Show("Consignee and related records deleted successfully!");
@@ -1056,6 +1053,53 @@ namespace Tidbits
             else
             {
                 MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
+        private void Consignee_update_btn_Click(object sender, EventArgs e)
+        {
+            if (Consignee_table.SelectedRows.Count > 0)
+            {
+
+                DataGridViewRow selectedRow = Consignee_table.SelectedRows[0];
+
+                int consigneeIdToUpdate = Convert.ToInt32(selectedRow.Cells["Consignee_ID"].Value);
+
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string updateQuery = "UPDATE Consignee SET Name = @ConsigneeName " +
+                                         "WHERE Consignee_ID = @ConsigneeID";
+
+                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                    {
+                        // Assuming you want to update values from textboxes
+                        cmd.Parameters.AddWithValue("@ConsigneeID", consigneeIdToUpdate);
+                        cmd.Parameters.AddWithValue("@ConsigneeName", Consignee_Name_txt.Text);
+
+                        // Execute the query
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Update the values in the DataGridView
+                            selectedRow.Cells["Consignee_Name"].Value = Consignee_Name_txt.Text;
+
+                            MessageBox.Show("Consignee updated successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update Consignee. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to update.");
             }
         }
     }
