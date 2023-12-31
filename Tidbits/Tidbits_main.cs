@@ -165,6 +165,8 @@ namespace Tidbits
         {
             Home_Panel.Visible = false;
             Inventory_Panel.Visible = true;
+            InitializeDataGridViewInventory();
+            DisplayInventoryData();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -226,6 +228,16 @@ namespace Tidbits
             Product_Table.Columns.Add("Product_ID", "Product ID");
             Product_Table.Columns.Add("Product_Name", "Product Name");
             Product_Table.Columns.Add("Price", "Price");
+        }
+        private void InitializeDataGridViewInventory()
+        {
+            // Clear existing columns
+            Inventory_table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Inventory_table.Columns.Add("Inventory_ID", "Inventory ID");
+            Inventory_table.Columns.Add("I_Product_ID", "Product ID");
+            Inventory_table.Columns.Add("Quantity", "Quantity");
         }
 
         //Display End Initialize
@@ -331,6 +343,42 @@ namespace Tidbits
                                 string price = reader.GetString(reader.GetOrdinal("Price"));
 
                                 Product_Table.Rows.Add(productId, productName, price);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void DisplayInventoryData()
+        {
+            // Clear existing rows in the DataGridView
+            Inventory_table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT * FROM tidbitsdb.inventory";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Check if the reader has any rows
+                        if (reader.HasRows)
+                        {
+                            // Iterate through the rows and add them to the DataGridView
+                            while (reader.Read())
+                            {
+                                // Assuming your DataGridView columns are named "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
+                                int inventoryid = reader.GetInt32(reader.GetOrdinal("Inventory_ID"));
+                                string iproductid = reader.GetString(reader.GetOrdinal("Product_ID"));
+                                string quantity = reader.GetString(reader.GetOrdinal("Quantity"));
+
+                                // Add a new row to the DataGridView
+                                Inventory_table.Rows.Add(inventoryid, iproductid, quantity);
                             }
                         }
                     }
@@ -673,6 +721,190 @@ namespace Tidbits
             catch
             {
                 MessageBox.Show("Error! Please make sure you enter a valid input");
+            }
+        }
+
+        private void Price_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Price_txt.Text, "[^0-9.]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Price_txt.Text = Price_txt.Text.Remove(Price_txt.Text.Length - 1);
+            }
+        }
+
+        private void Inventory_ID_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Inventory_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Inventory_ID_txt.Text = Inventory_ID_txt.Text.Remove(Inventory_ID_txt.Text.Length - 1);
+            }
+        }
+
+        private void I_Product_ID_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(I_Product_ID_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                I_Product_ID_txt.Text = I_Product_ID_txt.Text.Remove(I_Product_ID_txt.Text.Length - 1);
+            }
+        }
+
+        private void Quantity_txt_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(Quantity_txt.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                Quantity_txt.Text = Quantity_txt.Text.Remove(Quantity_txt.Text.Length - 1);
+            }
+        }
+
+        private void Inventory_table_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Inventory_add_btn_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string insertQuery = "INSERT INTO tidbitsdb.inventory (Inventory_ID, Product_ID, Quantity) " +
+                                         "VALUES (@InventoryID, @ProductID, @Quantity)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
+                    {
+
+                        cmd.Parameters.AddWithValue("@InventoryID", Inventory_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@ProductID", I_Product_ID_txt.Text);
+                        cmd.Parameters.AddWithValue("@Quantity", Quantity_txt.Text);
+
+                        // Execute the query
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Inventory added successfully!");
+                    }
+                }
+                InitializeDataGridViewInventory();
+                DisplayInventoryData();
+            }
+
+            catch
+            {
+                MessageBox.Show("Error! Please make sure you enter a valid input");
+            }
+        }
+
+        private void Inventory_Delete_btn_Click(object sender, EventArgs e)
+        {
+            if (Inventory_table.SelectedRows.Count > 0)
+            {
+
+                DataGridViewRow selectedRow = Inventory_table.SelectedRows[0];
+
+
+                int inventoryIdToDelete = Convert.ToInt32(selectedRow.Cells["Inventory_ID"].Value);
+
+
+                string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+
+
+
+                    // Now, delete the parent record in the "Employee" table
+                    string deleteInventoryQuery = "DELETE FROM Inventory WHERE Inventory_ID = @InventoryID";
+
+                    using (MySqlCommand cmdInventory = new MySqlCommand(deleteInventoryQuery, connection))
+                    {
+                        cmdInventory.Parameters.AddWithValue("@InventoryID", inventoryIdToDelete);
+
+                        // Execute the query
+                        int rowsAffected = cmdInventory.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Remove the row from the DataGridView
+                            Inventory_table.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("Inventory and related records deleted successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete inventory. Please try again.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
+        private void Inventory_Update_btn_Click(object sender, EventArgs e)
+        {
+            // Check if a row is selected in the DataGridView
+            try
+            {
+                if (Inventory_table.SelectedRows.Count > 0)
+                {
+                    // Get the selected row
+                    DataGridViewRow selectedRow = Inventory_table.SelectedRows[0];
+
+
+                    int inventoryIdToUpdate = Convert.ToInt32(selectedRow.Cells["Inventory_ID"].Value);
+
+                    string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        string updateQuery = "UPDATE Inventory SET Product_ID = @Productid, Quantity = @Quantity " +
+                                             "WHERE Inventory_ID = @InventoryID";
+
+                        using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                        {
+                            // Assuming you want to update values from textboxes
+                            cmd.Parameters.AddWithValue("@InventoryID", inventoryIdToUpdate);
+                            cmd.Parameters.AddWithValue("@ProductID", I_Product_ID_txt.Text);
+                            cmd.Parameters.AddWithValue("@Quantity", Quantity_txt.Text);
+
+                            // Execute the query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Update the values in the DataGridView
+                                selectedRow.Cells["I_Product_ID"].Value = I_Product_ID_txt.Text;
+                                selectedRow.Cells["Quantity"].Value = Quantity_txt.Text;
+
+                                MessageBox.Show("Inventory updated successfully!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to update employee. Please try again.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a row to update.");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a valid input");
             }
         }
     }

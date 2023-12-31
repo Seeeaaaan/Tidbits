@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             Username_txtbox = new TextBox();
             Username_lbl = new Label();
@@ -389,7 +390,7 @@
             Inventory_Panel.Controls.Add(Inventory_ID_txt);
             Inventory_Panel.Controls.Add(Inventory_lbl);
             Inventory_Panel.Controls.Add(Back_inventory_btn);
-            Inventory_Panel.Location = new Point(30, 21);
+            Inventory_Panel.Location = new Point(45, 199);
             Inventory_Panel.Name = "Inventory_Panel";
             Inventory_Panel.Size = new Size(1218, 658);
             Inventory_Panel.TabIndex = 9;
@@ -397,11 +398,24 @@
             // 
             // Inventory_table
             // 
+            Inventory_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Inventory_table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Inventory_table.BackgroundColor = Color.DarkGray;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            Inventory_table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             Inventory_table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Inventory_table.Location = new Point(456, 98);
             Inventory_table.Name = "Inventory_table";
+            Inventory_table.ReadOnly = true;
             Inventory_table.Size = new Size(655, 408);
             Inventory_table.TabIndex = 29;
+            Inventory_table.CellContentClick += Inventory_table_CellContentClick;
             // 
             // Inventory_Update_btn
             // 
@@ -412,6 +426,7 @@
             Inventory_Update_btn.TabIndex = 28;
             Inventory_Update_btn.Text = "Update";
             Inventory_Update_btn.UseVisualStyleBackColor = true;
+            Inventory_Update_btn.Click += Inventory_Update_btn_Click;
             // 
             // Inventory_Delete_btn
             // 
@@ -422,6 +437,7 @@
             Inventory_Delete_btn.TabIndex = 27;
             Inventory_Delete_btn.Text = "Delete";
             Inventory_Delete_btn.UseVisualStyleBackColor = true;
+            Inventory_Delete_btn.Click += Inventory_Delete_btn_Click;
             // 
             // Inventory_add_btn
             // 
@@ -432,6 +448,7 @@
             Inventory_add_btn.TabIndex = 26;
             Inventory_add_btn.Text = "Add";
             Inventory_add_btn.UseVisualStyleBackColor = true;
+            Inventory_add_btn.Click += Inventory_add_btn_Click;
             // 
             // Quantity_lbl
             // 
@@ -450,6 +467,7 @@
             Quantity_txt.Name = "Quantity_txt";
             Quantity_txt.Size = new Size(175, 29);
             Quantity_txt.TabIndex = 23;
+            Quantity_txt.TextChanged += Quantity_txt_TextChanged;
             // 
             // I_Product_ID_lbl
             // 
@@ -468,6 +486,7 @@
             I_Product_ID_txt.Name = "I_Product_ID_txt";
             I_Product_ID_txt.Size = new Size(175, 29);
             I_Product_ID_txt.TabIndex = 21;
+            I_Product_ID_txt.TextChanged += I_Product_ID_txt_TextChanged;
             // 
             // Inventory_ID_lbl
             // 
@@ -486,6 +505,7 @@
             Inventory_ID_txt.Name = "Inventory_ID_txt";
             Inventory_ID_txt.Size = new Size(175, 29);
             Inventory_ID_txt.TabIndex = 19;
+            Inventory_ID_txt.TextChanged += Inventory_ID_txt_TextChanged;
             // 
             // Inventory_lbl
             // 
@@ -533,14 +553,14 @@
             Product_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Product_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Product_Table.BackgroundColor = SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            Product_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            Product_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             Product_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Product_Table.Location = new Point(460, 91);
             Product_Table.Name = "Product_Table";
@@ -608,6 +628,7 @@
             Price_txt.Name = "Price_txt";
             Price_txt.Size = new Size(180, 29);
             Price_txt.TabIndex = 22;
+            Price_txt.TextChanged += Price_txt_TextChanged;
             // 
             // Price_lbl
             // 
@@ -698,14 +719,14 @@
             Department_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Department_Table.BackgroundColor = SystemColors.ActiveCaption;
             Department_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 30F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            Department_Table.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 30F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            Department_Table.DefaultCellStyle = dataGridViewCellStyle3;
             Department_Table.Location = new Point(283, 71);
             Department_Table.Name = "Department_Table";
             Department_Table.ReadOnly = true;
@@ -716,7 +737,6 @@
             // 
             Consignee_Panel.BackColor = Color.Transparent;
             Consignee_Panel.Controls.Add(Consignee_update_btn);
-            Consignee_Panel.Controls.Add(Inventory_Panel);
             Consignee_Panel.Controls.Add(Consignee_Delete_btn);
             Consignee_Panel.Controls.Add(Consignee_add_btn);
             Consignee_Panel.Controls.Add(Consignee_Name_lbl);
@@ -1282,14 +1302,14 @@
             Employee_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Employee_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Employee_Table.BackgroundColor = Color.DarkSlateGray;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.RosyBrown;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.RosyBrown;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             Employee_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Employee_Table.Location = new Point(396, 74);
             Employee_Table.Name = "Employee_Table";
@@ -1587,6 +1607,7 @@
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1202, 810);
             Controls.Add(Monitor_Panel);
+            Controls.Add(Inventory_Panel);
             Controls.Add(Product_panel);
             Controls.Add(Department_panel);
             Controls.Add(Employee_panel);
