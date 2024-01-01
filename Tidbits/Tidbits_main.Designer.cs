@@ -41,11 +41,13 @@
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
-            Username_txtbox = new TextBox();
-            Username_lbl = new Label();
-            Password_txtbox = new TextBox();
-            Password_lbl = new Label();
             Employee_btn = new Button();
             Quest = new Label();
             Department_btn = new Button();
@@ -118,7 +120,6 @@
             Sale_ID_lbl = new Label();
             Sale_ID_txt = new TextBox();
             Sale_Table = new DataGridView();
-            Sale_Update_btn = new Button();
             Sale_Delete_btn = new Button();
             Sale_Add_btn = new Button();
             Sold_Quantity_lbl = new Label();
@@ -200,44 +201,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // Username_txtbox
-            // 
-            Username_txtbox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Username_txtbox.Location = new Point(147, 24);
-            Username_txtbox.Name = "Username_txtbox";
-            Username_txtbox.Size = new Size(146, 29);
-            Username_txtbox.TabIndex = 1;
-            // 
-            // Username_lbl
-            // 
-            Username_lbl.AutoSize = true;
-            Username_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Username_lbl.Location = new Point(60, 32);
-            Username_lbl.Name = "Username_lbl";
-            Username_lbl.Size = new Size(81, 21);
-            Username_lbl.TabIndex = 0;
-            Username_lbl.Text = "Username";
-            Username_lbl.Click += Username_Click;
-            // 
-            // Password_txtbox
-            // 
-            Password_txtbox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Password_txtbox.Location = new Point(147, 85);
-            Password_txtbox.Name = "Password_txtbox";
-            Password_txtbox.Size = new Size(146, 29);
-            Password_txtbox.TabIndex = 3;
-            // 
-            // Password_lbl
-            // 
-            Password_lbl.AutoSize = true;
-            Password_lbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Password_lbl.Location = new Point(60, 93);
-            Password_lbl.Name = "Password_lbl";
-            Password_lbl.Size = new Size(76, 21);
-            Password_lbl.TabIndex = 2;
-            Password_lbl.Text = "Password";
-            Password_lbl.Click += label1_Click;
             // 
             // Employee_btn
             // 
@@ -372,10 +335,6 @@
             Home_Panel.Controls.Add(Department_btn);
             Home_Panel.Controls.Add(Quest);
             Home_Panel.Controls.Add(Employee_btn);
-            Home_Panel.Controls.Add(Password_lbl);
-            Home_Panel.Controls.Add(Password_txtbox);
-            Home_Panel.Controls.Add(Username_lbl);
-            Home_Panel.Controls.Add(Username_txtbox);
             Home_Panel.Location = new Point(78, 232);
             Home_Panel.Name = "Home_Panel";
             Home_Panel.Size = new Size(1115, 603);
@@ -396,7 +355,7 @@
             Inventory_Panel.Controls.Add(Inventory_ID_txt);
             Inventory_Panel.Controls.Add(Inventory_lbl);
             Inventory_Panel.Controls.Add(Back_inventory_btn);
-            Inventory_Panel.Location = new Point(42, 211);
+            Inventory_Panel.Location = new Point(46, 198);
             Inventory_Panel.Name = "Inventory_Panel";
             Inventory_Panel.Size = new Size(1218, 658);
             Inventory_Panel.TabIndex = 9;
@@ -544,6 +503,7 @@
             // 
             // Product_panel
             // 
+            Product_panel.BackColor = Color.Transparent;
             Product_panel.Controls.Add(Product_Table);
             Product_panel.Controls.Add(Product_back_btn);
             Product_panel.Controls.Add(Product_ID_txt);
@@ -556,7 +516,7 @@
             Product_panel.Controls.Add(Product_Name_lbl);
             Product_panel.Controls.Add(Product_ID_lbl);
             Product_panel.Controls.Add(Product_lbl);
-            Product_panel.Location = new Point(47, 212);
+            Product_panel.Location = new Point(50, 202);
             Product_panel.Name = "Product_panel";
             Product_panel.Size = new Size(1147, 615);
             Product_panel.TabIndex = 8;
@@ -707,7 +667,7 @@
             Department_panel.Controls.Add(Back_btn_department);
             Department_panel.Controls.Add(Department_lbl);
             Department_panel.Controls.Add(Department_Table);
-            Department_panel.Location = new Point(61, 218);
+            Department_panel.Location = new Point(56, 211);
             Department_panel.Name = "Department_panel";
             Department_panel.Size = new Size(1161, 629);
             Department_panel.TabIndex = 7;
@@ -768,7 +728,7 @@
             Consignee_Panel.Controls.Add(Consignee_lbl);
             Consignee_Panel.Controls.Add(Consignee_back_btn);
             Consignee_Panel.Controls.Add(Consignee_table);
-            Consignee_Panel.Location = new Point(34, 205);
+            Consignee_Panel.Location = new Point(39, 192);
             Consignee_Panel.Name = "Consignee_Panel";
             Consignee_Panel.Size = new Size(1265, 693);
             Consignee_Panel.TabIndex = 10;
@@ -829,11 +789,11 @@
             // 
             Consignee_ID_lbl.AutoSize = true;
             Consignee_ID_lbl.Font = new Font("Segoe UI", 12F);
-            Consignee_ID_lbl.Location = new Point(37, 123);
+            Consignee_ID_lbl.Location = new Point(37, 108);
             Consignee_ID_lbl.Name = "Consignee_ID_lbl";
-            Consignee_ID_lbl.Size = new Size(105, 21);
+            Consignee_ID_lbl.Size = new Size(114, 42);
             Consignee_ID_lbl.TabIndex = 20;
-            Consignee_ID_lbl.Text = "Consignee_ID";
+            Consignee_ID_lbl.Text = "Consignee_ID\r\n(max of 5 char)";
             // 
             // Consignee_txt
             // 
@@ -909,7 +869,7 @@
             Consignment_Panel.Controls.Add(Consignment_ID_txt);
             Consignment_Panel.Controls.Add(Consignment_lbl);
             Consignment_Panel.Controls.Add(Consignment_back_btn);
-            Consignment_Panel.Location = new Point(31, 202);
+            Consignment_Panel.Location = new Point(30, 180);
             Consignment_Panel.Name = "Consignment_Panel";
             Consignment_Panel.Size = new Size(1260, 715);
             Consignment_Panel.TabIndex = 11;
@@ -976,6 +936,7 @@
             Consignment_Table.DefaultCellStyle = dataGridViewCellStyle9;
             Consignment_Table.Location = new Point(456, 98);
             Consignment_Table.Name = "Consignment_Table";
+            Consignment_Table.ReadOnly = true;
             Consignment_Table.Size = new Size(655, 408);
             Consignment_Table.TabIndex = 29;
             Consignment_Table.CellContentClick += Consignment_Table_CellContentClick;
@@ -1024,11 +985,11 @@
             // 
             Consignment_ID_lbl.AutoSize = true;
             Consignment_ID_lbl.Font = new Font("Segoe UI", 12F);
-            Consignment_ID_lbl.Location = new Point(37, 123);
+            Consignment_ID_lbl.Location = new Point(37, 107);
             Consignment_ID_lbl.Name = "Consignment_ID_lbl";
-            Consignment_ID_lbl.Size = new Size(122, 21);
+            Consignment_ID_lbl.Size = new Size(122, 42);
             Consignment_ID_lbl.TabIndex = 20;
-            Consignment_ID_lbl.Text = "Consignment ID";
+            Consignment_ID_lbl.Text = "Consignment ID\r\n(max of 8 char)";
             // 
             // Consignment_ID_txt
             // 
@@ -1067,7 +1028,6 @@
             Sale_Panel.Controls.Add(Sale_ID_lbl);
             Sale_Panel.Controls.Add(Sale_ID_txt);
             Sale_Panel.Controls.Add(Sale_Table);
-            Sale_Panel.Controls.Add(Sale_Update_btn);
             Sale_Panel.Controls.Add(Sale_Delete_btn);
             Sale_Panel.Controls.Add(Sale_Add_btn);
             Sale_Panel.Controls.Add(Sold_Quantity_lbl);
@@ -1076,11 +1036,12 @@
             Sale_Panel.Controls.Add(S_Consignment_ID_txt);
             Sale_Panel.Controls.Add(Sale_lbl);
             Sale_Panel.Controls.Add(button4);
-            Sale_Panel.Location = new Point(21, 193);
+            Sale_Panel.Location = new Point(23, 178);
             Sale_Panel.Name = "Sale_Panel";
             Sale_Panel.Size = new Size(1310, 734);
             Sale_Panel.TabIndex = 12;
             Sale_Panel.Visible = false;
+            Sale_Panel.Paint += Sale_Panel_Paint;
             // 
             // Sold_Date_lbl
             // 
@@ -1121,21 +1082,30 @@
             // 
             // Sale_Table
             // 
+            Sale_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Sale_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.Control;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            Sale_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             Sale_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Sale_Table.Location = new Point(456, 98);
             Sale_Table.Name = "Sale_Table";
+            Sale_Table.ReadOnly = true;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            Sale_Table.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             Sale_Table.Size = new Size(655, 408);
             Sale_Table.TabIndex = 29;
-            // 
-            // Sale_Update_btn
-            // 
-            Sale_Update_btn.Font = new Font("Segoe UI", 12F);
-            Sale_Update_btn.Location = new Point(258, 295);
-            Sale_Update_btn.Name = "Sale_Update_btn";
-            Sale_Update_btn.Size = new Size(97, 32);
-            Sale_Update_btn.TabIndex = 28;
-            Sale_Update_btn.Text = "Update";
-            Sale_Update_btn.UseVisualStyleBackColor = true;
             // 
             // Sale_Delete_btn
             // 
@@ -1146,6 +1116,7 @@
             Sale_Delete_btn.TabIndex = 27;
             Sale_Delete_btn.Text = "Delete";
             Sale_Delete_btn.UseVisualStyleBackColor = true;
+            Sale_Delete_btn.Click += Sale_Delete_btn_Click;
             // 
             // Sale_Add_btn
             // 
@@ -1175,6 +1146,7 @@
             Sold_Quantity_txt.Name = "Sold_Quantity_txt";
             Sold_Quantity_txt.Size = new Size(175, 29);
             Sold_Quantity_txt.TabIndex = 21;
+            Sold_Quantity_txt.TextChanged += Sold_Quantity_txt_TextChanged;
             // 
             // S_Consignment_ID_lbl
             // 
@@ -1217,6 +1189,7 @@
             // 
             // Employee_panel
             // 
+            Employee_panel.BackColor = Color.Transparent;
             Employee_panel.Controls.Add(Employee_Delete_btn);
             Employee_panel.Controls.Add(Employee_Add_btn);
             Employee_panel.Controls.Add(Contact_Number_txt);
@@ -1231,7 +1204,7 @@
             Employee_panel.Controls.Add(Employee_lbl);
             Employee_panel.Controls.Add(Employee_Table);
             Employee_panel.Controls.Add(Employee_Update_btn);
-            Employee_panel.Location = new Point(68, 224);
+            Employee_panel.Location = new Point(66, 219);
             Employee_panel.Name = "Employee_panel";
             Employee_panel.Size = new Size(1125, 616);
             Employee_panel.TabIndex = 6;
@@ -1359,23 +1332,23 @@
             Employee_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Employee_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             Employee_Table.BackgroundColor = Color.DarkSlateGray;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.RosyBrown;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 18F);
-            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.RosyBrown;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            Employee_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             Employee_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = SystemColors.Window;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 14F);
-            dataGridViewCellStyle11.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
-            Employee_Table.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.Window;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle13.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            Employee_Table.DefaultCellStyle = dataGridViewCellStyle13;
             Employee_Table.Location = new Point(396, 74);
             Employee_Table.Name = "Employee_Table";
             Employee_Table.ReadOnly = true;
@@ -1409,7 +1382,7 @@
             Assigned_Panel.Controls.Add(A_Department_ID_txt);
             Assigned_Panel.Controls.Add(Assigned_lbl);
             Assigned_Panel.Controls.Add(Assigned_Back_btn);
-            Assigned_Panel.Location = new Point(71, 73);
+            Assigned_Panel.Location = new Point(12, 170);
             Assigned_Panel.Name = "Assigned_Panel";
             Assigned_Panel.Size = new Size(1325, 740);
             Assigned_Panel.TabIndex = 13;
@@ -1417,7 +1390,25 @@
             // 
             // Assigned_Table
             // 
+            Assigned_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Assigned_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = SystemColors.Control;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 18F);
+            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            Assigned_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             Assigned_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = SystemColors.Window;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle15.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            Assigned_Table.DefaultCellStyle = dataGridViewCellStyle15;
             Assigned_Table.Location = new Point(485, 60);
             Assigned_Table.Name = "Assigned_Table";
             Assigned_Table.Size = new Size(598, 382);
@@ -1440,6 +1431,7 @@
             A_Employee_ID_txt.Name = "A_Employee_ID_txt";
             A_Employee_ID_txt.Size = new Size(175, 29);
             A_Employee_ID_txt.TabIndex = 30;
+            A_Employee_ID_txt.TextChanged += A_Employee_ID_txt_TextChanged;
             // 
             // Assigned_Update_btn
             // 
@@ -1450,6 +1442,7 @@
             Assigned_Update_btn.TabIndex = 28;
             Assigned_Update_btn.Text = "Update";
             Assigned_Update_btn.UseVisualStyleBackColor = true;
+            Assigned_Update_btn.Click += Assigned_Update_btn_Click;
             // 
             // Assigned_Delete_btn
             // 
@@ -1460,6 +1453,7 @@
             Assigned_Delete_btn.TabIndex = 27;
             Assigned_Delete_btn.Text = "Delete";
             Assigned_Delete_btn.UseVisualStyleBackColor = true;
+            Assigned_Delete_btn.Click += Assigned_Delete_btn_Click;
             // 
             // Asssigned_Add_btn
             // 
@@ -1470,6 +1464,7 @@
             Asssigned_Add_btn.TabIndex = 26;
             Asssigned_Add_btn.Text = "Add";
             Asssigned_Add_btn.UseVisualStyleBackColor = true;
+            Asssigned_Add_btn.Click += Asssigned_Add_btn_Click;
             // 
             // Position_lbl
             // 
@@ -1506,6 +1501,7 @@
             A_Department_ID_txt.Name = "A_Department_ID_txt";
             A_Department_ID_txt.Size = new Size(175, 29);
             A_Department_ID_txt.TabIndex = 19;
+            A_Department_ID_txt.TextChanged += A_Department_ID_txt_TextChanged;
             // 
             // Assigned_lbl
             // 
@@ -1532,7 +1528,6 @@
             // 
             Monitor_Panel.BackColor = Color.Transparent;
             Monitor_Panel.Controls.Add(M_Employee_ID_lbl);
-            Monitor_Panel.Controls.Add(Assigned_Panel);
             Monitor_Panel.Controls.Add(M_Employee_ID_txt);
             Monitor_Panel.Controls.Add(M_Inventory_ID_lbl);
             Monitor_Panel.Controls.Add(M_Inventory_ID);
@@ -1544,7 +1539,7 @@
             Monitor_Panel.Controls.Add(Date_txt);
             Monitor_Panel.Controls.Add(Monitor_lbl);
             Monitor_Panel.Controls.Add(Monitor_Back_btn);
-            Monitor_Panel.Location = new Point(839, 37);
+            Monitor_Panel.Location = new Point(3, 163);
             Monitor_Panel.Name = "Monitor_Panel";
             Monitor_Panel.Size = new Size(1352, 761);
             Monitor_Panel.TabIndex = 14;
@@ -1567,6 +1562,7 @@
             M_Employee_ID_txt.Name = "M_Employee_ID_txt";
             M_Employee_ID_txt.Size = new Size(175, 29);
             M_Employee_ID_txt.TabIndex = 36;
+            M_Employee_ID_txt.TextChanged += M_Employee_ID_txt_TextChanged;
             // 
             // M_Inventory_ID_lbl
             // 
@@ -1585,22 +1581,43 @@
             M_Inventory_ID.Name = "M_Inventory_ID";
             M_Inventory_ID.Size = new Size(175, 29);
             M_Inventory_ID.TabIndex = 34;
+            M_Inventory_ID.TextChanged += M_Inventory_ID_TextChanged;
             // 
             // Date_lbl
             // 
             Date_lbl.AutoSize = true;
             Date_lbl.Font = new Font("Segoe UI", 12F);
-            Date_lbl.Location = new Point(66, 196);
+            Date_lbl.Location = new Point(68, 187);
             Date_lbl.Name = "Date_lbl";
-            Date_lbl.Size = new Size(42, 21);
+            Date_lbl.Size = new Size(118, 42);
             Date_lbl.TabIndex = 33;
-            Date_lbl.Text = "Date";
+            Date_lbl.Text = "Date\r\n(YYYY-MM-DD)";
             // 
             // Monitor_Table
             // 
+            Monitor_Table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Monitor_Table.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Monitor_Table.BackgroundColor = SystemColors.Info;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = SystemColors.Control;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 20F);
+            dataGridViewCellStyle16.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            Monitor_Table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             Monitor_Table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = SystemColors.Window;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle17.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
+            Monitor_Table.DefaultCellStyle = dataGridViewCellStyle17;
             Monitor_Table.Location = new Point(435, 106);
             Monitor_Table.Name = "Monitor_Table";
+            Monitor_Table.ReadOnly = true;
             Monitor_Table.Size = new Size(686, 427);
             Monitor_Table.TabIndex = 32;
             // 
@@ -1613,6 +1630,7 @@
             Monitor_Update_btn.TabIndex = 28;
             Monitor_Update_btn.Text = "Update";
             Monitor_Update_btn.UseVisualStyleBackColor = true;
+            Monitor_Update_btn.Click += Monitor_Update_btn_Click;
             // 
             // Monitor_Delte_btn
             // 
@@ -1623,6 +1641,7 @@
             Monitor_Delte_btn.TabIndex = 27;
             Monitor_Delte_btn.Text = "Delete";
             Monitor_Delte_btn.UseVisualStyleBackColor = true;
+            Monitor_Delte_btn.Click += Monitor_Delte_btn_Click;
             // 
             // Monitor_Add_btn
             // 
@@ -1633,6 +1652,7 @@
             Monitor_Add_btn.TabIndex = 26;
             Monitor_Add_btn.Text = "Add";
             Monitor_Add_btn.UseVisualStyleBackColor = true;
+            Monitor_Add_btn.Click += Monitor_Add_btn_Click;
             // 
             // Date_txt
             // 
@@ -1667,11 +1687,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Teal;
-            BackgroundImageLayout = ImageLayout.Zoom;
+            BackColor = Color.FromArgb(255, 224, 192);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1202, 810);
-            Controls.Add(Sale_Panel);
             Controls.Add(Monitor_Panel);
+            Controls.Add(Assigned_Panel);
+            Controls.Add(Sale_Panel);
             Controls.Add(Consignment_Panel);
             Controls.Add(Consignee_Panel);
             Controls.Add(Inventory_Panel);
@@ -1680,7 +1702,6 @@
             Controls.Add(Employee_panel);
             Controls.Add(Home_Panel);
             Controls.Add(pictureBox1);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "Tidbits_main";
             Text = "Tidbitsdb";
             Load += Tidbits_main_Load;
@@ -1720,10 +1741,6 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private TextBox Username_txtbox;
-        private Label Username_lbl;
-        private TextBox Password_txtbox;
-        private Label Password_lbl;
         private Button Employee_btn;
         private Label Quest;
         private Button Department_btn;
@@ -1811,7 +1828,6 @@
         private Label Sale_ID_lbl;
         private TextBox Sale_ID_txt;
         private DataGridView Sale_Table;
-        private Button Sale_Update_btn;
         private Button Sale_Delete_btn;
         private Button Sale_Add_btn;
         private Label Sold_Quantity_lbl;
