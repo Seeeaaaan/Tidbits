@@ -188,6 +188,8 @@ namespace Tidbits
         {
             Home_Panel.Visible = false;
             Sale_Panel.Visible = true;
+            InitializeDataGridViewSale();
+            DisplaySaleData();
         }
 
         private void Assigned_btn_Click(object sender, EventArgs e)
@@ -263,6 +265,19 @@ namespace Tidbits
             Consignment_Table.Columns.Add("Product_ID", "Product ID");
             Consignment_Table.Columns.Add("Resell_Price", "Resell Price");
         }
+
+        private void InitializeDataGridViewSale()
+        {
+            // Clear existing columns
+            Sale_Table.Columns.Clear();
+
+            // Add columns to the DataGridView
+            Sale_Table.Columns.Add("Sale_ID", "Sale ID");
+            Sale_Table.Columns.Add("Consignment_ID", "Consignment ID");
+            Sale_Table.Columns.Add("Sold_Quantity", "Sold Quantity");
+            Sale_Table.Columns.Add("Sold_Date", "Sold Date");
+        }
+
         //Display End Initialize
 
         //Display Start Data
@@ -478,6 +493,40 @@ namespace Tidbits
             }
         }
 
+        private void DisplaySaleData()
+        {
+            // Clear existing rows in the DataGridView
+            Sale_Table.Rows.Clear();
+
+            string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectQuery = "SELECT * FROM tidbitsdb.sale";
+
+                using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                int saleID = reader.GetInt32(reader.GetOrdinal("Sale_ID"));
+                                string consignmentID = reader.GetString(reader.GetOrdinal("Consignment_ID"));
+                                string soldQuantity = reader.GetString(reader.GetOrdinal("Sold_Quantity"));
+                                string soldDate = reader.GetString(reader.GetOrdinal("Sold_Date"));
+
+                                // Add a new row to the DataGridView
+                                Sale_Table.Rows.Add(saleID, consignmentID, soldQuantity, soldDate);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         //Display End Data
 
         private void Employee_Table_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -1203,32 +1252,26 @@ namespace Tidbits
         {
             if (Consignment_Table.SelectedRows.Count > 0)
             {
-                // Get the selected row
                 DataGridViewRow selectedRow = Consignment_Table.SelectedRows[0];
 
-                // Get the value from the "Consignment_ID" column
                 string consignmentIDToDelete = selectedRow.Cells["Consignment_ID"].Value.ToString();
 
-                // Replace "YourConnectionString" with your actual connection string
                 string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    // Assuming your table is named "Consignment" and the column is "Consignment_ID"
                     string deleteQuery = "DELETE FROM Consignment WHERE Consignment_ID = @ConsignmentID";
 
                     using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@ConsignmentID", consignmentIDToDelete);
 
-                        // Execute the query
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                            // Remove the row from the DataGridView
                             Consignment_Table.Rows.Remove(selectedRow);
 
                             MessageBox.Show("Consignment deleted successfully!");
@@ -1246,5 +1289,9 @@ namespace Tidbits
             }
         }
 
+        private void Sale_Add_btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

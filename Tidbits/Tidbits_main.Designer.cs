@@ -1076,7 +1076,7 @@
             Sale_Panel.Controls.Add(S_Consignment_ID_txt);
             Sale_Panel.Controls.Add(Sale_lbl);
             Sale_Panel.Controls.Add(button4);
-            Sale_Panel.Location = new Point(82, 66);
+            Sale_Panel.Location = new Point(21, 193);
             Sale_Panel.Name = "Sale_Panel";
             Sale_Panel.Size = new Size(1310, 734);
             Sale_Panel.TabIndex = 12;
@@ -1086,11 +1086,11 @@
             // 
             Sold_Date_lbl.AutoSize = true;
             Sold_Date_lbl.Font = new Font("Segoe UI", 12F);
-            Sold_Date_lbl.Location = new Point(37, 241);
+            Sold_Date_lbl.Location = new Point(1, 242);
             Sold_Date_lbl.Name = "Sold_Date_lbl";
-            Sold_Date_lbl.Size = new Size(77, 21);
+            Sold_Date_lbl.Size = new Size(185, 21);
             Sold_Date_lbl.TabIndex = 33;
-            Sold_Date_lbl.Text = "Sold Date";
+            Sold_Date_lbl.Text = "Sold Date(YYYY/MM/DD)";
             // 
             // Sold_Date_txt
             // 
@@ -1156,6 +1156,7 @@
             Sale_Add_btn.TabIndex = 26;
             Sale_Add_btn.Text = "Add";
             Sale_Add_btn.UseVisualStyleBackColor = true;
+            Sale_Add_btn.Click += Sale_Add_btn_Click;
             // 
             // Sold_Quantity_lbl
             // 
@@ -1398,7 +1399,6 @@
             Assigned_Panel.BackColor = Color.Transparent;
             Assigned_Panel.Controls.Add(Assigned_Table);
             Assigned_Panel.Controls.Add(A_Employee_ID_lbl);
-            Assigned_Panel.Controls.Add(Sale_Panel);
             Assigned_Panel.Controls.Add(A_Employee_ID_txt);
             Assigned_Panel.Controls.Add(Assigned_Update_btn);
             Assigned_Panel.Controls.Add(Assigned_Delete_btn);
@@ -1544,7 +1544,7 @@
             Monitor_Panel.Controls.Add(Date_txt);
             Monitor_Panel.Controls.Add(Monitor_lbl);
             Monitor_Panel.Controls.Add(Monitor_Back_btn);
-            Monitor_Panel.Location = new Point(792, 66);
+            Monitor_Panel.Location = new Point(839, 37);
             Monitor_Panel.Name = "Monitor_Panel";
             Monitor_Panel.Size = new Size(1352, 761);
             Monitor_Panel.TabIndex = 14;
@@ -1670,6 +1670,7 @@
             BackColor = Color.Teal;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1202, 810);
+            Controls.Add(Sale_Panel);
             Controls.Add(Monitor_Panel);
             Controls.Add(Consignment_Panel);
             Controls.Add(Consignee_Panel);
