@@ -305,7 +305,7 @@ namespace Tidbits
         }
 
         //Display End Initialize
-
+        //Ge kapoy nako
         //Display Start Data
         private void DisplayEmployeeData()
         {
@@ -318,7 +318,6 @@ namespace Tidbits
             {
                 connection.Open();
 
-                // Assuming your table is named "Employee"
                 string selectQuery = "SELECT * FROM tidbitsdb.employee";
 
                 using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
@@ -668,7 +667,6 @@ namespace Tidbits
                 {
                     connection.Open();
 
-                    // Delete related records in the "Assigned" table
                     string deleteAssignedQuery = "DELETE FROM tidbitsdb.Assigned WHERE Employee_ID = @EmployeeID";
 
                     using (MySqlCommand cmdAssigned = new MySqlCommand(deleteAssignedQuery, connection))
@@ -686,7 +684,6 @@ namespace Tidbits
                     }
 
 
-                    // Delete the parent record in the "Employee" table
                     string deleteEmployeeQuery = "DELETE FROM tidbitsdb.Employee WHERE Employee_ID = @EmployeeID";
 
                     using (MySqlCommand cmdEmployee = new MySqlCommand(deleteEmployeeQuery, connection))
@@ -725,23 +722,19 @@ namespace Tidbits
                     // Get the selected row
                     DataGridViewRow selectedRow = Employee_Table.SelectedRows[0];
 
-                    // Get the value from the "Employee_ID" column (assuming it's the first column)
                     int employeeIdToUpdate = Convert.ToInt32(selectedRow.Cells["Employee_ID"].Value);
 
-                    // Replace "YourConnectionString" with your actual connection string
                     string connectionString = "Server=localhost;Database=tidbitsdb;User Id=admin;Password=admin;Persist Security Info=True";
 
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
 
-                        // Assuming your table is named "Employee" and columns are "Employee_ID," "Contact_Number," "Last_Name," "First_Name"
                         string updateQuery = "UPDATE Employee SET Contact_Number = @ContactNumber, Last_Name = @LastName, First_Name = @FirstName " +
                                              "WHERE Employee_ID = @EmployeeID";
 
                         using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Assuming you want to update values from textboxes
                             cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
                             cmd.Parameters.AddWithValue("@ContactNumber", Contact_Number_txt.Text);
                             cmd.Parameters.AddWithValue("@LastName", Last_Name_txt.Text);
@@ -802,7 +795,6 @@ namespace Tidbits
 
                     using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
                     {
-                        // Assuming you want to insert values from textboxes
                         cmd.Parameters.AddWithValue("@ProductID", Product_ID_txt.Text);
                         cmd.Parameters.AddWithValue("@ProductName", Product_Name_txt.Text);
                         cmd.Parameters.AddWithValue("@Price", Price_txt.Text);
@@ -853,7 +845,6 @@ namespace Tidbits
                             cmdAssigned.ExecuteNonQuery();
                         }
 
-                        // Delete related records in "OtherTable1"
                         string deleteConsignmentQuery = "DELETE FROM tidbitsdb.Consignment WHERE Product_ID = @ProductID";
 
                         using (MySqlCommand cmdOtherTable1 = new MySqlCommand(deleteConsignmentQuery, connection))
@@ -929,7 +920,6 @@ namespace Tidbits
 
                         using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Assuming you want to update values from textboxes
                             cmd.Parameters.AddWithValue("@ProductID", productIdToUpdate);
                             cmd.Parameters.AddWithValue("@ProductName", Product_Name_txt.Text);
                             cmd.Parameters.AddWithValue("@Price", Price_txt.Text);
@@ -1089,7 +1079,6 @@ namespace Tidbits
 
         private void Inventory_Update_btn_Click(object sender, EventArgs e)
         {
-            // Check if a row is selected in the DataGridView
             try
             {
                 if (Inventory_table.SelectedRows.Count > 0)
@@ -1255,7 +1244,6 @@ namespace Tidbits
 
                     using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                     {
-                        // Assuming you want to update values from textboxes
                         cmd.Parameters.AddWithValue("@ConsigneeID", consigneeIdToUpdate);
                         cmd.Parameters.AddWithValue("@ConsigneeName", Consignee_Name_txt.Text);
 
@@ -1598,7 +1586,6 @@ namespace Tidbits
 
                         using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Assuming you want to update values from textboxes
                             cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
                             cmd.Parameters.AddWithValue("@DepartmentID", A_Department_ID_txt.Text);
                             cmd.Parameters.AddWithValue("@Position", Position_txt.Text);
@@ -1750,7 +1737,6 @@ namespace Tidbits
 
                         using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
-                            // Assuming you want to update values from textboxes
                             cmd.Parameters.AddWithValue("@EmployeeID", employeeIdToUpdate);
                             cmd.Parameters.AddWithValue("@InventoryID", M_Inventory_ID.Text);
                             cmd.Parameters.AddWithValue("@Date", Date_txt.Text);
