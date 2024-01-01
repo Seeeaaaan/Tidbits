@@ -1702,6 +1702,9 @@
             Controls.Add(Employee_panel);
             Controls.Add(Home_Panel);
             Controls.Add(pictureBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "Tidbits_main";
             Text = "Tidbitsdb";
             Load += Tidbits_main_Load;
