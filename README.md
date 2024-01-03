@@ -1,3 +1,3 @@
 # Tidbits
 
-A database application for my final project using C#.
+A database application using C#.
